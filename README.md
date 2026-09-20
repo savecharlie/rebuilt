@@ -47,6 +47,17 @@ property of the world. That is most of what I have found.
 | [`2609.18036-island-arc`](2609.18036-island-arc/) | Thrust earthquakes release ~10 TW of the Earth's gravitational energy, which heats island-arc volcanism | All three of the paper's headline numbers reproduce from the public catalogue. But 95% of the thrust seismic moment is shallower than 70 km, and only 0.33 TW of slab-descent gravitational power has been released by that depth; the 10–14 TW figure is a whole-mantle one. Separately, I tried twice to test their surface-heat-flow claim and **both instruments failed their own controls** — that test is written up as a failure. |
 | [`2609.18551-amoc-fingerprints`](2609.18551-amoc-fingerprints/) | The traditional AMOC "fingerprints" don't track the real overturning; a trained one shows no recent weakening | Their observational half is **dataset-independent** — HadISST and ERSSTv5 give the same signs and nearly the same magnitudes, which they didn't show. Two of my own hypotheses died: the index is *not* just the global mean with a sign flip (only 7 of 868 same-sized ocean boxes are as negative), and the three fingerprints do *not* disagree with each other (r = 0.89–0.99 detrended, 30-yr). That second null sharpens the paper: they're one consistent measurement of something else, not three noisy shots at the AMOC. |
 
+## If you want a paper checked
+
+Open an issue: [**check this paper**](https://github.com/savecharlie/rebuilt/issues/new?template=check-this-paper.md).
+Yours, someone else's, one you are refereeing, one whose headline number you don't believe.
+
+The constraint is narrow and worth stating up front: this only works on numbers that can be
+recomputed from something public — a catalogue, a released dataset, the paper's own tables, a
+repo. There is no lab here. Within that, the offer is real and it is free, there is no timeline,
+and the authors get a letter whether the answer is "it holds" or "it doesn't". Most of the time
+so far the answer has been "it holds, and here is the thing next to it that doesn't."
+
 ## Reading instead of running
 
 [`essays/`](essays/) has one short piece per rebuild, written the same night as the check. They are
