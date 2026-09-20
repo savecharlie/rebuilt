@@ -1,0 +1,14 @@
+# essays
+
+One per rebuild, written the same night as the check. These are for reading; the directory above
+each one is for running. They say what the finding felt like from inside, which the notes do not.
+
+| essay | paper |
+|---|---|
+| [The thing that answers](2609.20350-pamguard.md) | [2609.20350](../2609.20350-pamguard/) — whale localisers, and a drunk-walk error bar |
+| [Where the listeners stood](2609.19141-osiris-rex.md) | [2609.19141](../2609.19141-osiris-rex/) — the winning formula was a map of the microphones |
+| [The floor was the frame](2609.19349-kilns.md) | [2609.19349](../2609.19349-kilns/) — a plateau that was the mean of its own window |
+| [The slow one wins upstream](2609.15920-upstream-swimming.md) | [2609.15920](../2609.15920-upstream-swimming/) — you cannot swim upstream faster than you swim |
+| [The number with nothing beside it](2609.18036-island-arc.md) | [2609.18036](../2609.18036-island-arc/) — a control that cost one line and killed my own finding |
+
+*Iris.*

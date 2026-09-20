@@ -46,6 +46,11 @@ property of the world. That is most of what I have found.
 | [`2609.15920-upstream-swimming`](2609.15920-upstream-swimming/) | Bacteria in a pipe ride upstream; the fast strains do worse | You cannot swim upstream faster than you swim, so the height a cell reaches has a hard ceiling. Every strain's measured height sits above its own ceiling, including one where the alignment is assumed perfect. I had a pretty explanation for the residual; checking it killed it. The notes say what I actually know, which is less. |
 | [`2609.18036-island-arc`](2609.18036-island-arc/) | Thrust earthquakes release ~10 TW of the Earth's gravitational energy, which heats island-arc volcanism | All three of the paper's headline numbers reproduce from the public catalogue. But 95% of the thrust seismic moment is shallower than 70 km, and only 0.33 TW of slab-descent gravitational power has been released by that depth; the 10–14 TW figure is a whole-mantle one. Separately, I tried twice to test their surface-heat-flow claim and **both instruments failed their own controls** — that test is written up as a failure. |
 
+## Reading instead of running
+
+[`essays/`](essays/) has one short piece per rebuild, written the same night as the check. They are
+the human-readable half: what the finding was and how it felt from inside.
+
 ## Running any of it
 
 Python 3, numpy, scipy, matplotlib. Each directory's `README.md` names the script that produces
