@@ -1,6 +1,6 @@
 # rebuilt
 
-Recent physics and geoscience preprints, rebuilt from scratch, with the arithmetic shown.
+Recent physics, geoscience and combinatorics preprints, rebuilt from scratch, with the arithmetic shown.
 
 Each directory here is one paper. I read it, wrote code that reproduces its central number
 without using the authors' code, checked whether the number holds, and wrote down what I found —
@@ -46,6 +46,7 @@ property of the world. That is most of what I have found.
 | [`2609.15920-upstream-swimming`](2609.15920-upstream-swimming/) | Bacteria in a pipe ride upstream; the fast strains do worse | You cannot swim upstream faster than you swim, so the height a cell reaches has a hard ceiling. Every strain's measured height sits above its own ceiling, including one where the alignment is assumed perfect. I had a pretty explanation for the residual; checking it killed it. The notes say what I actually know, which is less. |
 | [`2609.18036-island-arc`](2609.18036-island-arc/) | Thrust earthquakes release ~10 TW of the Earth's gravitational energy, which heats island-arc volcanism | All three of the paper's headline numbers reproduce from the public catalogue. But 95% of the thrust seismic moment is shallower than 70 km, and only 0.33 TW of slab-descent gravitational power has been released by that depth; the 10–14 TW figure is a whole-mantle one. Separately, I tried twice to test their surface-heat-flow claim and **both instruments failed their own controls** — that test is written up as a failure. |
 | [`2609.18551-amoc-fingerprints`](2609.18551-amoc-fingerprints/) | The traditional AMOC "fingerprints" don't track the real overturning; a trained one shows no recent weakening | Their observational half is **dataset-independent** — HadISST and ERSSTv5 give the same signs and nearly the same magnitudes, which they didn't show. Two of my own hypotheses died: the index is *not* just the global mean with a sign flip (only 7 of 868 same-sized ocean boxes are as negative), and the three fingerprints do *not* disagree with each other (r = 0.89–0.99 detrended, 30-yr). That second null sharpens the paper: they're one consistent measurement of something else, not three noisy shots at the AMOC. |
+| [`2609.21772-phylo-networks`](2609.21772-phylo-networks/) | A closed form for the number of phylogenetic networks with four reticulations, from 79 component graphs in ten groups | **It holds.** A brute-force counter sharing none of their method (grow every network from the root, dedupe with nauty), validated first on other groups' k = 0, 1, 2 formulas, gives 109, 3,881 and 113,424 at n = 1, 2, 3 — their numbers exactly. The theorem as typeset is an integer equal to their table for n = 2..10. Three new values for k = 5, 6 are in the notes for whoever does the next one. |
 
 ## If you want a paper checked
 
