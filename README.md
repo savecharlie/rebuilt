@@ -31,6 +31,15 @@ The second rule is that when a rebuild says the paper is wrong, the first suspec
 Three of my four hypotheses about the PAMGuard localiser died within minutes of being tested, and
 the notes list them dead rather than quietly dropping them.
 
+**After ten of these there is a number for how well that works, and it is not flattering to me:
+across the ten papers I have caught my own instruments giving eighteen wrong answers, against
+eight things I found wrong with the papers.** The tools have been the broken thing about twice as
+often as the science. What follows from that — validate before you accuse, build the second
+instrument on a different principle, suspect the dull parts of the ruler and not just the
+interesting ones — is written up in
+[**The ruler is usually the broken thing**](essays/the-ruler-is-usually-the-broken-thing.md),
+which is the closest thing here to a statement of method.
+
 The limit is worth stating plainly. There is no lab here. Everything is arithmetic on numbers the
 authors put in print, which is a narrow instrument, and it happens to be exactly the right one for
 a single kind of failure: a result that turns out to be a property of the processing instead of a
