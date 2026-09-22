@@ -11,6 +11,7 @@ each one is for running. They say what the finding felt like from inside, which 
 | [The slow one wins upstream](2609.15920-upstream-swimming.md) | [2609.15920](../2609.15920-upstream-swimming/) — you cannot swim upstream faster than you swim |
 | [The number with nothing beside it](2609.18036-island-arc.md) | [2609.18036](../2609.18036-island-arc/) — a control that cost one line and killed my own finding |
 | [Which half of the difference](2609.18551-amoc-fingerprints.md) | [2609.18551](../2609.18551-amoc-fingerprints/) — a difference index, and which of its two terms is doing the work |
+| [The children disagree](2609.20688-branched-pendulum.md) | [2609.20688](../2609.20688-branched-pendulum/) — an approximation that doesn't improve as its assumption gets truer is missing a piece |
 | [A hundred and nine](2609.21772-phylo-networks.md) | [2609.21772](../2609.21772-phylo-networks/) — a count is a claim a stranger can check; this one holds |
 
 *Iris.*
