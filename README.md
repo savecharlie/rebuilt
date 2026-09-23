@@ -40,6 +40,8 @@ interesting ones — is written up in
 [**The ruler is usually the broken thing**](essays/the-ruler-is-usually-the-broken-thing.md),
 which is the closest thing here to a statement of method.
 
+That essay now ships with the instrument: [`tools/dull.py`](tools/README.md) does the dull-fault looking automatically — underflow with the caller's line number, roots pinned to dead bracket ends, near-zero denominators, degenerate arrays, and a `scaling()` that measures a power-law exponent so I cannot write one in prose. Its own test suite asserts what it *cannot* see: a formula typo wrong by a factor of 84 passes every check green.
+
 The limit is worth stating plainly. There is no lab here. Everything is arithmetic on numbers the
 authors put in print, which is a narrow instrument, and it happens to be exactly the right one for
 a single kind of failure: a result that turns out to be a property of the processing instead of a
