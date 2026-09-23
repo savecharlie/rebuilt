@@ -1,0 +1,37 @@
+Radius contraction produced by a uniform mantle density deficit
+(core = eps-Fe x 0.9 [PREM-validated], CMF = 0.325)
+
+  solid reference planets:
+       1 Me   R = 0.9882 Re ( 6295.8 km)   R_cmb = 3481.0 km   P_c =   365.4 GPa
+       3 Me   R = 1.3534 Re ( 8622.4 km)   R_cmb = 4590.6 km   P_c =  1088.0 GPa
+       5 Me   R = 1.5502 Re ( 9876.1 km)   R_cmb = 5159.4 km   P_c =  1897.6 GPa
+      10 Me   R = 1.8372 Re (11705.1 km)   R_cmb = 5957.1 km   P_c =  4302.2 GPa
+
+    delta |    1 Me contraction |    3 Me contraction |    5 Me contraction |   10 Me contraction
+     0.0 % |             0.00 % |             0.00 % |             0.00 % |             0.00 %
+     5.0 % |             1.63 % |             1.83 % |             1.94 % |             2.15 %
+    10.0 % |             3.33 % |             3.72 % |             3.95 % |             4.36 %
+    15.0 % |             5.10 % |             5.68 % |             6.03 % |             6.63 %
+    20.0 % |             6.94 % |             7.71 % |             8.18 % |             8.98 %
+    25.0 % |             8.87 % |             9.83 % |            10.41 % |            11.41 %
+    30.0 % |            10.89 % |            12.03 % |            12.73 % |            13.92 %
+    35.0 % |            13.02 % |            14.34 % |            15.15 % |            16.52 %
+
+  Inverting for the paper's quoted contraction:
+       1 Me  target  11.3 %  ->  delta = 30.98 %
+              confirming solve gives 11.30 % (interpolation error 0.000 points)
+              mean mantle densification -33.7 %   amplification -0.75x   R_molten 7098 km
+      10 Me  target   9.5 %  ->  delta = 21.08 %
+              confirming solve gives  9.50 % (interpolation error 0.000 points)
+              mean mantle densification -28.0 %   amplification -1.05x   R_molten 12934 km
+
+  Their claim: contraction falls from ~11 % at 1 Me to ~9.5 % at 10 Me.
+    at a FIXED delta = 30.98 % (the value that reproduces their 1 Me number):
+         1 Me  contraction  11.30 %
+         3 Me  contraction  12.48 %
+         5 Me  contraction  13.20 %
+        10 Me  contraction  14.42 %
+    measured mass exponent +0.1050
+    paper 11.3 -> 9.5 % over 1 -> 10 Me is exponent -0.0754
+
+dull: clean -- no dull faults seen. (A typo in a formula is still invisible here; that is what the second instrument is for.)

@@ -1,0 +1,18 @@
+solid 1 Me reference: R = 6295.8 km, P_cmb = 134.4 GPa
+
+Forward: contraction from a published, pressure-dependent contrast
+   delta(0)  delta(136GPa)  P* [GPa]  R_molten [km]  contraction
+       0.20          0.040      84.5         6568.8        4.16 %
+       0.20          0.016      53.8         6507.5        3.25 %
+       0.25          0.040      74.2         6630.6        5.05 %
+       0.30          0.060      84.5         6747.3        6.69 %
+       0.15          0.040     102.9         6509.7        3.29 %
+       0.35          0.080      92.1         6875.2        8.43 %
+
+  range 3.25 to 8.43 %   against the paper's 11.3 %
+  the most generous case here reaches 75 % of their number,
+  and the paper attributes a further 1-2 points of its 11.3 % to thermal
+  contraction of the superheated melt, which is not included above.
+
+dull: 1 finding(s)
+  [underflow] (numpy): first occurrence   (literature_melt.py:44)  x1152
