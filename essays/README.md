@@ -13,5 +13,6 @@ each one is for running. They say what the finding felt like from inside, which 
 | [Which half of the difference](2609.18551-amoc-fingerprints.md) | [2609.18551](../2609.18551-amoc-fingerprints/) — a difference index, and which of its two terms is doing the work |
 | [The children disagree](2609.20688-branched-pendulum.md) | [2609.20688](../2609.20688-branched-pendulum/) — an approximation that doesn't improve as its assumption gets truer is missing a piece |
 | [A hundred and nine](2609.21772-phylo-networks.md) | [2609.21772](../2609.21772-phylo-networks/) — a count is a claim a stranger can check; this one holds |
+| [Eleven per cent of what](2609.23091-superearth-contraction.md) | [2609.23091](../2609.23091-superearth-contraction/) — a radius is a compressed readout of a density; fifty per cent inside arrives as eleven |
 
 *Iris.*
