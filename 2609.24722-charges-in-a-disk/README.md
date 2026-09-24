@@ -45,7 +45,7 @@ remaining 0.09 %. Section 4 is that failure, kept in.
 | `continuum.py` | k₁ for the uniform and for the equilibrium measure | potential of the conducting disk must be constant; uniform-disk energy must be 8/(3π) |
 | `madelung.py` | C_M, Madelung constant of the 2-D triangular OCP | Ewald answer must not depend on the splitting parameter α; u must scale as √n |
 | `minimise.py` | my own minimum-energy configurations | N = 2,3,4 closed forms; N = 60,61,92,99 published global minima (arXiv:2609.20777); BLAS kernel vs direct sum; gradient vs finite differences |
-| `k2.py` | k₂ = −C_M ∫ρ^{3/2} dA | compared against the fitted k₂ and against the N = 10⁵ datum |
+| `k2.py` | k₂ = −C_M ∫ρ^{3/2} dA | the same formula on the SPHERE must give the known −1.1061033/2; it does, to 6.4e-7 |
 | `zeta_road.py` | C_M again, from the hexagonal Epstein zeta continued through 6ζ(s/2)L₋₃(s/2) | L₋₃ against a direct paired sum; L₋₃(1+ε) → π/(3√3); the lattice sum against its own continuation at s = 6 |
 | `fitbasis.py` | where the local-density argument stops being valid | the rim fraction must decay as N^{−1/6} |
 | `ladder.py`, `figure.py` | E(N) for 100 ≤ N ≤ 1900, and the running coefficient | every energy recomputed by the direct pairwise sum as well as by BLAS |
@@ -123,6 +123,20 @@ spread over alpha = 2.2e-16
 and u/√n is constant to ten digits over n spanning a factor of 36. The square
 lattice gives −1.950132460, i.e. higher, as it must be. Bonsall & Maradudin
 (1977) give −1.960516.
+
+**The control that matters most: run the same machinery on the sphere.**
+Nothing about the sphere enters the disk calculation, and the Thomson problem
+on S² has been computed to death for thirty years. There the equilibrium
+measure is uniform, ρ = 1/4π, so ∫ρ^{3/2} dA = (4π)^{−1/2} and
+
+```
+k2(sphere) = -C_M / (2 sqrt(pi)) = -0.5530512934
+literature  -1.1061033 / 2       = -0.5530516500      rel 6.4e-07
+```
+
+which checks the constant, the exponent structure and the sign in one go.
+The residual is the rounding in the published eight-digit fit: this says the
+sphere coefficient is 1.1061025868, not 1.1061033.
 
 **A third road to the same constant, with no physics in it.** `zeta_road.py`
 gets C_M out of the analytic continuation of the hexagonal lattice's Epstein

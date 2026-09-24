@@ -20,7 +20,42 @@ E_LN = 7.80466624157e9                  # Lavrov & Nikonov, N = 100000
 N_LN = 100_000
 
 
+SPHERE_LIT = -1.1061033 / 2.0    # E = (1/2)(N^2 - 1.1061033 N^{3/2}), Thomson on S^2
+
+
+def sphere_control():
+    """Validate the whole k2 machinery where the answer is already known.
+
+    The same formula, k2 = -C_M int rho^{1+s/d}, applied to the unit SPHERE:
+    there the equilibrium measure is uniform, rho = 1/(4 pi), so
+
+        int rho^{3/2} dA = 4 pi (4 pi)^{-3/2} = (4 pi)^{-1/2}
+        k2 = -C_M / (2 sqrt(pi))
+
+    The Thomson problem on S^2 has been computed to death for thirty years and
+    the accepted value is E = (1/2)(N^2 - 1.1061033 N^{3/2}).  If my constant,
+    my exponent structure and my sign are right, these must agree — and the
+    sphere has nothing to do with the disk, so this is a real external check.
+    """
+    C_M, _ = madelung.constant("triangular", verbose=False)
+    C_M = -C_M
+    shape_sphere = (4 * np.pi) ** -0.5
+    k2_sphere = -C_M * shape_sphere
+    print("=" * 74)
+    print("EXTERNAL CONTROL — the same machinery on the sphere")
+    print("=" * 74)
+    print(f"  int rho^{{3/2}} dA on S^2      = (4 pi)^-1/2 = {shape_sphere:.10f}")
+    print(f"  k2(sphere) = -C_M/(2 sqrt pi) = {k2_sphere:.10f}")
+    print(f"  literature  -1.1061033/2      = {SPHERE_LIT:.10f}")
+    print(f"  relative difference           = "
+          f"{abs(k2_sphere-SPHERE_LIT)/abs(SPHERE_LIT):.2e}")
+    print("  (nothing about the sphere enters the disk calculation; this checks")
+    print("   the constant, the exponent structure and the sign all at once.)")
+    print()
+
+
 def main():
+    sphere_control()
     C_M, spread = madelung.constant("triangular", verbose=False)
     C_M = -C_M
     k2 = -C_M * SHAPE
