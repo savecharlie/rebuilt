@@ -68,3 +68,37 @@ def main(path="ladder.json"):
 if __name__ == "__main__":
     import sys
     main(*sys.argv[1:])
+
+
+def window_scatter(path="ladder.json"):
+    """How well is k2 actually determined by a fit in their basis?
+
+    The formal least-squares error bar assumes the model is right.  It is not:
+    the basis is truncated.  So instead of trusting sigma, refit over windows
+    that grow at the top and look at how much the answer MOVES.
+    """
+    rows = json.load(open(path))
+    N = np.array([r["N"] for r in rows], float)
+    E = np.array([r["E"] for r in rows], float)
+    print("\n" + "=" * 78)
+    print("WINDOW SCATTER — the formal error bar is not the real one")
+    print("=" * 78)
+    ks = []
+    for top in range(4, len(N) + 1):
+        n, e = N[:top], E[:top]
+        powers = [1.5, 1.0, 0.5, 0.0][:max(2, top - 1)]
+        A = np.stack([n ** p for p in powers], 1)
+        c, *_ = np.linalg.lstsq(A, e - K1 * n ** 2, rcond=None)
+        ks.append(c[0])
+        print(f"  100..{int(n[-1]):>5d}  ({top} pts)   k2 = {c[0]:.6f}"
+              f"   gap to theory {c[0]-K2_TH:+.6f}")
+    ks = np.array(ks[1:])          # drop the 4-point interpolation
+    print(f"\n  scatter over windows (sd)      {ks.std(ddof=1):.6f}")
+    print(f"  formal sigma from one window   0.000280")
+    print(f"  gap theory - Amore/Zarate      {abs(K2_TH-K2_AZ):.6f}")
+    print(f"  ratio scatter/sigma            {ks.std(ddof=1)/0.000280:.1f}x")
+    print("  The scatter is several times the formal sigma AND larger than the")
+    print("  gap being argued about.  A truncated basis gives a precise answer")
+    print("  to the wrong question.")
+
+

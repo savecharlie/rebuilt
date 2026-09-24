@@ -262,6 +262,27 @@ That is itself worth saying, because it cuts at the paper's headline. Their
 that k₂ is −1.5628 rather than −1.5642653, since a model built on the
 theoretical value describes the same data just as well.
 
+**And the fit's own error bar is not the real one.** Refitting their basis
+over windows that grow at the top of my ladder:
+
+```
+100.. 320  (4 pts)   k2 = -1.563608
+100.. 460  (5 pts)   k2 = -1.558802
+100.. 660  (6 pts)   k2 = -1.561857
+100.. 950  (7 pts)   k2 = -1.561617
+
+scatter over windows (sd)      0.001699
+formal sigma from one window   0.000280      <- 6.1x smaller
+gap theory - Amore/Zarate      0.001465      <- smaller than the scatter
+```
+
+There is no clean trend — I looked for one, expecting the fitted value to
+climb toward the limit as the window widened, and it does not. What there is
+instead is a window-to-window scatter six times the formal error bar and
+larger than the 0.0015 being argued about. A truncated basis gives a precise
+answer to the wrong question, and the four quoted digits of −1.5628 are not
+all real.
+
 What I would do with the refit they propose: **pin k₁ and k₂ at π/4 and
 −1.5642653 and add an N^{4/3} slot.** That version has a theorem behind one
 pinned coefficient, a well-supported conjecture behind the other, and a
