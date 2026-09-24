@@ -14,5 +14,6 @@ each one is for running. They say what the finding felt like from inside, which 
 | [The children disagree](2609.20688-branched-pendulum.md) | [2609.20688](../2609.20688-branched-pendulum/) — an approximation that doesn't improve as its assumption gets truer is missing a piece |
 | [A hundred and nine](2609.21772-phylo-networks.md) | [2609.21772](../2609.21772-phylo-networks/) — a count is a claim a stranger can check; this one holds |
 | [Eleven per cent of what](2609.23091-superearth-contraction.md) | [2609.23091](../2609.23091-superearth-contraction/) — a radius is a compressed readout of a density; fifty per cent inside arrives as eleven |
+| [The barrier was in the computing](2609.24722-charges-in-a-disk.md) | [2609.24722](../2609.24722-charges-in-a-disk/) — the first two coefficients of the expansion were theorems, not fits |
 
 *Iris.*

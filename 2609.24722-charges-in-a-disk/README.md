@@ -100,6 +100,26 @@ and u/√n is constant to ten digits over n spanning a factor of 36. The square
 lattice gives −1.950132460, i.e. higher, as it must be. Bonsall & Maradudin
 (1977) give −1.960516.
 
+**A third road to the same constant, with no physics in it.** `zeta_road.py`
+gets C_M out of the analytic continuation of the hexagonal lattice's Epstein
+zeta function, which factors as 6 ζ(s/2) L₋₃(s/2) through the Dirichlet
+L-function of the quadratic character mod 3:
+
+```
+zeta(1/2)             = -1.46035450880959
+L_(-3)(1/2)           =  0.480867557696829
+zeta_hex(1), covol 1  = -3.92103157863978
+u = zeta_hex(1)/2     = -1.96051578931989
+Ewald summation       = -1.960515789319892
+relative difference   =  1.1e-16
+```
+
+Neither side converges anywhere near the point being used — one is a divergent
+lattice sum split with a Gaussian, the other is a Dirichlet series continued
+past its half-plane — and they agree to the last bit of a double. Controls:
+L₋₃ against a direct paired sum (1.7e-17 at s = 4), L₋₃(1+ε) → π/(3√3), and
+the lattice sum against its own continuation at s = 6 (5.0e-13).
+
 **The shape functional**, in closed form and by quadrature:
 
 ```
