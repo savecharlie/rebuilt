@@ -51,8 +51,29 @@ def main(path="ladder.json", out="running_k2.png"):
     ax.set_ylabel(r"$k_2^{\rm eff}(N)=-\left[\frac{\pi}{4}N^2-E(N)\right]/N^{3/2}$")
     ax.set_title("The second coefficient is not a fitting parameter", fontsize=12)
     ax.grid(alpha=.25, which="both", lw=.5)
-    ax.legend(loc="lower left", fontsize=8.6, framealpha=.95)
+    ax.legend(loc="lower left", fontsize=8.2, framealpha=.95,
+              bbox_to_anchor=(0.015, 0.02))
     ax.set_ylim(-1.60, -1.30)
+
+    # inset: the two candidate k2 values, at a scale where they separate
+    ins = fig.add_axes([0.46, 0.42, 0.27, 0.24])
+    ins.axhline(K2_THEORY, color="#1a6b54", lw=2.0)
+    ins.axhline(AZ["k2"], color="#c0392b", lw=1.2, ls=":")
+    Ni = np.geomspace(3e3, 3e5, 200)
+    ins.plot(Ni, (AZ["k2"] * Ni ** 1.5 + AZ["k3"] * Ni + AZ["k4"] * np.sqrt(Ni)
+                  + AZ["k5"]) / Ni ** 1.5, color="#c0392b", lw=1.4)
+    ins.plot([LN[0]], keff(*LN), "*", ms=13, color="#e08a1e",
+             markeredgecolor="#7a4a00")
+    ins.set_xscale("log")
+    ins.set_ylim(-1.5665, -1.5555)
+    ins.set_xlim(3e3, 3e5)
+    ins.tick_params(labelsize=7)
+    ins.set_title("the whole question: 0.0015 apart", fontsize=7.2, pad=2)
+    ins.set_yticks([-1.556, -1.560, -1.564])
+    for sp in ins.spines.values():
+        sp.set_linewidth(0.8)
+    ins.set_facecolor("#fbfbfb")
+    ins.grid(alpha=.25, lw=.4)
     fig.tight_layout()
     fig.savefig(out)
     print("wrote", out)

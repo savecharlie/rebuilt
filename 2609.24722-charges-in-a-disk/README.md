@@ -173,6 +173,15 @@ k₂ = −1.9605157893 × 0.7978845608 = −1.5642652795
 against the fitted **−1.5628** of Amore & Zárate — a relative difference of
 9.4×10⁻⁴.
 
+![running second coefficient](running_k2.png)
+
+*The running coefficient k₂_eff(N) = [E(N) − (π/4)N²]/N^{3/2}, which is what
+k₂ would be if the expansion stopped at two terms. My own minima (dark dots)
+land on Amore & Zárate's fitted curve, which is an independent check that they
+are near-global. The star is the 31-hour datum. The inset is the whole
+question: the exact value and the fitted value are 0.0015 apart, and at N=10⁵
+the running coefficient is still above both.*
+
 ## 3. What the two free terms predict
 
 ```
