@@ -213,20 +213,50 @@ confined to a region whose whole contribution is a lower order — and there
 must be an N^{4/3} term, which the fitted basis {N², N^{3/2}, N, N^{1/2}, 1}
 has no slot for.
 
-**And that is as far as the argument goes, because the data do not support
-the obvious next step.** I expected the missing N^{4/3} term to be what drags
-the fitted k₂ off its limit, so I measured the exponent of the gap instead of
-asserting it (`dull.scaling`, which is in the toolchain precisely because I
-once wrote an exponent in prose that the column underneath me contradicted).
-Writing
+**And here the argument stops, because the data will not take sides.** I
+expected the missing N^{4/3} term to be what drags the fitted k₂ off its
+limit, so I measured the exponent of the gap instead of asserting it
+(`dull.scaling`, which is in the toolchain precisely because I once wrote an
+exponent in prose that the column underneath me contradicted). Writing
 
 ```
 k₂_eff(N) ≡ [E(N) − (π/4)N²] / N^{3/2} = k₂ + k_{4/3}N^{−1/6} + k₃N^{−1/2} + …
 ```
 
-a dominant N^{4/3} term would make the gap decay as N^{−1/6} = −0.167. Over
-my own ladder plus their N = 10⁵ datum — three decades — the measured
-exponent is about **−0.44**, i.e. the gap is dominated by the ordinary N term,
-as their basis assumes. The N^{4/3} term is real on dimensional grounds and
-small in practice over the accessible range.
+a dominant N^{4/3} term would make the gap close as N^{−1/6} = −0.167. Over my
+ladder it closes with exponent **−0.476**; over my ladder plus their N = 10⁵
+datum, three decades, **−0.436**. So the gap is dominated by the ordinary N
+term, as their basis assumes, and the drift from −0.476 to −0.436 is the only
+hint of anything slower.
 
+Then the sharper test: fit on my own minima, 100 ≤ N ≤ 660, and predict their
+N = 10⁵ energy — **152× beyond the data**, and a number the fit has never
+seen. Two free parameters. `robustness.py` does it for six subsets of the
+ladder, two choices of k₂ and two bases:
+
+```
+k2 pinned at     basis          rel @ 1e5, across six subsets
+theory           N^{4/3} + N    7.4e-07 .. 1.0e-06     k_{4/3} = 0.0105..0.0110
+theory           N only         6.2e-06 .. 6.4e-06
+Amore-Zarate     N^{4/3} + N    1.5e-06 .. 2.2e-06
+Amore-Zarate     N only         6.2e-07 .. 7.5e-07
+published 5-parameter fit       2.5e-07
+```
+
+**Two different stories fit equally well.** "Theoretical k₂ plus an N^{4/3}
+term" and "fitted k₂ with no N^{4/3} term" both reproduce a 10⁵-charge energy
+from data stopping at 660, to within a part in a million, robustly across every
+subset I tried. The numerics cannot currently tell them apart.
+
+That is itself worth saying, because it cuts at the paper's headline. Their
+2.5×10⁻⁷ agreement is a stringent test of the **expansion**; it is not evidence
+that k₂ is −1.5628 rather than −1.5642653, since a model built on the
+theoretical value describes the same data just as well.
+
+What I would do with the refit they propose: **pin k₁ and k₂ at π/4 and
+−1.5642653 and add an N^{4/3} slot.** That version has a theorem behind one
+pinned coefficient, a well-supported conjecture behind the other, and a
+physical argument behind the extra term, and it has three free numbers where
+the present basis has four. If k₂ really is the theoretical value then
+**k_{4/3} ≈ 0.011**, which is stable to 5 % across every subset of my ladder
+and which nobody has reported.
