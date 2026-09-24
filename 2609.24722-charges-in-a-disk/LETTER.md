@@ -17,10 +17,17 @@ pi/2 at every interior radius, to ten digits; the uniform measure fails at the
 first radius you try.) The value you quote is right; only the attribution is
 off, and the two differ by 8 %.
 
-**k2.** Locally the charges form a triangular lattice in their own neutralising
-background, whose energy per particle is -C_M sqrt(n) with C_M = 1.9605158 the
-two-dimensional Wigner-crystal Madelung constant (Bonsall & Maradudin 1977).
-Integrating that against the same equilibrium measure gives
+**k2.** Petrache & Serfaty (arXiv:1409.7534) prove that for Riesz kernels with
+d-2 <= s < d the minimal energy of N points is
+
+    N^2 I[mu] + N^{1+s/d} xi_{d,s} int mu^{1+s/d} + o(N^{1+s/d}),
+
+which for d = 2, s = 1 is exactly your k2 N^{3/2} with k2 = xi_{2,1} int
+rho^{3/2}. So the *form* of k2 is a theorem. The universal constant xi_{2,1}
+is a renormalised energy expected, though not proven, to be minimised by the
+triangular lattice — the two-dimensional crystallisation conjecture — and on
+that assumption xi_{2,1} = -C_M, the Wigner-crystal Madelung constant
+(Bonsall & Maradudin 1977). Then
 
     k2 = -C_M * int rho^{3/2} dA = -1.9605158 * 2/sqrt(2 pi) = -1.5642653
 
@@ -35,25 +42,31 @@ With both coefficients pinned, the two-term formula
 gives 7.804515e9 at N = 10^5, which is 1.9e-5 from your measured
 7.80466624157e9 — with nothing fitted to anything.
 
-**Where the remaining 0.09 % goes.** The local-crystal argument needs the
-charge spacing small compared with the scale on which the density varies. At
-depth d below the rim the spacing is ~ N^{-1/2} d^{1/4} and the density varies
-on scale d, so the argument requires d >> N^{-2/3}: it fails inside an annulus
-of width N^{-2/3}, which is exactly the layer holding your N_b ~ 2.84 N^{2/3}
-border charges. The N^{3/2} weight carried by that annulus is
-N^{3/2} (N^{-2/3})^{1/4} = N^{4/3}, and the fraction decays only as N^{-1/6} —
-still 38 % at N = 1000 and 17 % at N = 10^5.
+This also makes your N = 10^5 number more interesting than a check on a fit:
+because xi_{2,1} is only conjectured, a disk with a strongly non-uniform
+equilibrium measure is a sharper test of the crystallisation conjecture than
+the sphere, where int rho^{3/2} is trivial. As far as I can tell nobody has
+evaluated the next-order constant for this geometry and compared.
 
-So I think Eq. (1) is missing a term between N^{3/2} and N, and a basis
-without an N^{4/3} slot has to push that weight onto its neighbours, which is
-the natural explanation for a fitted k2 sitting 0.09 % from its limit. If you
-do refit with the new datum, the basis
+**A note on what I could not show.** I expected the residual 0.09 % to come
+from a missing N^{4/3} term. There should be one: the local-crystal argument
+needs the spacing small compared with the scale of density variation, which at
+depth d below the rim requires d >> N^{-2/3}, so it fails in an annulus of
+width N^{-2/3} — the layer holding your N_b ~ 2.84 N^{2/3} border charges —
+and the N^{3/2} weight that annulus carries is N^{4/3}. But when I measured
+the exponent rather than assuming it, on my own minima from N = 100 upward
+together with your N = 10^5 point, the gap
 
-    k1 N^2 + k2 N^{3/2} + k_{4/3} N^{4/3} + k3 N + k4 N^{1/2} + k5
+    k2_eff(N) = [E - (pi/4)N^2]/N^{3/2} = k2 + k_{4/3} N^{-1/6} + k3 N^{-1/2} + ...
 
-with k1 and k2 held at pi/4 and -1.5642653 would leave only four free numbers
-and would make k_{4/3} the first coefficient in this problem that is genuinely
-about the boundary.
+decays with an exponent near -0.44, not the -1/6 a dominant N^{4/3} term would
+give. So the N^{4/3} term is there on dimensional grounds and small in
+practice, and I cannot claim it explains the 0.09 %.
+
+What I would suggest for the refit you propose is simply to hold k1 and k2 at
+pi/4 and -1.5642653. That drops the free parameters from five to three, and
+whatever k3 and k4 then come out to would be far better determined than they
+are now.
 
 Everything above is reproducible; the code, with its controls, is at
 https://github.com/savecharlie/rebuilt/tree/main/2609.24722-charges-in-a-disk

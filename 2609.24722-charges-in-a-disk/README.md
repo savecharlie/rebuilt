@@ -13,21 +13,28 @@ and the paper's headline is that this number sits 2.525×10⁻⁷ away from an
 asymptotic expansion whose coefficients were fitted, by other people, to data
 that stopped at N = 5000.
 
-**The first two coefficients of that expansion are not fitting parameters.**
-Both were available in closed form before any of this was computed — one from
-the electrostatics of a charged conducting disk, one from the Madelung energy
-of a two-dimensional Wigner crystal. Put together they give
+**The first two coefficients of that expansion need not be fitted.** k₁ is a
+theorem about the electrostatics of a charged conducting disk, known since the
+1860s. k₂'s *form* is a theorem too — Petrache & Serfaty's next-order
+asymptotic for Riesz interactions — and its one universal constant is the
+two-dimensional crystallisation conjecture, i.e. the Madelung energy of a
+triangular Wigner crystal. Taking that value,
 
 ```
 E(N) ≈ (π/4) N² − 1.5642653 N^{3/2}
 ```
 
-with nothing fitted to anything, and that two-term formula reproduces the
+with nothing fitted to anything, and this two-term formula reproduces the
 31-hour result to **1.9×10⁻⁵**.
 
-This rebuild computes both coefficients from scratch, checks the second
-against the fitted value, and asks where the remaining 0.09 % discrepancy
-lives.
+Which makes their computation a better thing than they claim it is: not a
+check on somebody's fit, but one of the sharper numerical tests available of
+the crystallisation conjecture, in a geometry where the equilibrium measure is
+strongly non-uniform and ∫ρ^{3/2} is therefore doing real work.
+
+This rebuild computes both constants from scratch — the second one three
+independent ways — checks them against the fit, and then fails to explain the
+remaining 0.09 %. Section 4 is that failure, kept in.
 
 ---
 
@@ -39,8 +46,11 @@ lives.
 | `madelung.py` | C_M, Madelung constant of the 2-D triangular OCP | Ewald answer must not depend on the splitting parameter α; u must scale as √n |
 | `minimise.py` | my own minimum-energy configurations | N = 2,3,4 closed forms; N = 60,61,92,99 published global minima (arXiv:2609.20777); BLAS kernel vs direct sum; gradient vs finite differences |
 | `k2.py` | k₂ = −C_M ∫ρ^{3/2} dA | compared against the fitted k₂ and against the N = 10⁵ datum |
+| `zeta_road.py` | C_M again, from the hexagonal Epstein zeta continued through 6ζ(s/2)L₋₃(s/2) | L₋₃ against a direct paired sum; L₋₃(1+ε) → π/(3√3); the lattice sum against its own continuation at s = 6 |
 | `fitbasis.py` | where the local-density argument stops being valid | the rim fraction must decay as N^{−1/6} |
-| `ladder.py`, `figure.py` | E(N) for 100 ≤ N ≤ 2000, and the running coefficient | |
+| `ladder.py`, `figure.py` | E(N) for 100 ≤ N ≤ 1900, and the running coefficient | every energy recomputed by the direct pairwise sum as well as by BLAS |
+| `analysis.py` | the exponent of the gap, and whether a fit like theirs can resolve it | `dull.scaling` measures the exponent rather than letting me write one |
+| `structure.py` | ψ₆ and Voronoi coordination on my own minimum; radial density | \|ψ₆\| = 1 on a triangular lattice and 0 on a square one; density against the arcsine measure |
 
 ---
 
@@ -72,15 +82,29 @@ The number π/4 is right; the sentence attached to it is not.
 
 ## 2. k₂ is the Madelung constant of the local crystal
 
-Where the charge density is n, a triangular lattice sitting in its own
-neutralising background has energy per particle −C_M √n. Summing that over the
-disk with n = Nρ gives
+This is not a new idea — it is the standard next-order asymptotic, and the
+only thing missing is that nobody has evaluated it for this geometry.
+Petrache & Serfaty (arXiv:1409.7534) prove that for Riesz interactions with
+d−2 ≤ s < d the minimal energy of N points has the form
+
+```
+N² I[μ] + N^{1+s/d} · ξ_{d,s} · ∫ μ^{1+s/d} dA + o(N^{1+s/d})
+```
+
+Here d = 2, s = 1, so the second term is exactly N^{3/2} ∫ρ^{3/2}, which is
+the k₂N^{3/2} of Eq. (1). The **structure** of k₂ is therefore a theorem. The
+**value** of the universal constant ξ₂,₁ is a renormalised energy which is
+expected — not proven — to be minimised by the triangular lattice, which is
+the two-dimensional crystallisation (Abrikosov) conjecture. Taking that value,
+ξ₂,₁ = −C_M with C_M the triangular Wigner-crystal Madelung constant, gives
 
 ```
 k₂ = −C_M ∫ ρ^{3/2} dA
 ```
 
-Both factors are computable exactly.
+Both factors are then computable exactly, so **the disk numerics are a test of
+the crystallisation conjecture**, which is a more interesting thing for them
+to be than a check on somebody's fit.
 
 **C_M by Ewald summation** (`madelung.py`), with the splitting parameter as the
 control — the split is arbitrary, so a correct implementation cannot depend on
@@ -170,11 +194,25 @@ The N^{3/2} weight carried by that annulus is N^{3/2}·(N^{−2/3})^{1/4} =
   ratio per decade: 0.6844, 0.6820, 0.6814, 0.6813      10^(-1/6) = 0.6813
 ```
 
-Two consequences. First, k₂ = −C_M∫ρ^{3/2} is exact as the coefficient of
-N^{3/2} — the failure is confined to a region whose whole contribution is a
-lower order. Second, the next term in the expansion is N^{4/3}, and the fitted
-basis {N², N^{3/2}, N, N^{1/2}, 1} has no slot for it, so its weight has to go
-somewhere. Over 100 ≤ N ≤ 5000 the rim annulus still carries between 55 % and
-28 % of the N^{3/2} weight, which is why the fitted k₂ can be pulled 0.09 %
-off its limit and still describe the data well.
+So k₂ = −C_M∫ρ^{3/2} is exact as the coefficient of N^{3/2} — the failure is
+confined to a region whose whole contribution is a lower order — and there
+must be an N^{4/3} term, which the fitted basis {N², N^{3/2}, N, N^{1/2}, 1}
+has no slot for.
+
+**And that is as far as the argument goes, because the data do not support
+the obvious next step.** I expected the missing N^{4/3} term to be what drags
+the fitted k₂ off its limit, so I measured the exponent of the gap instead of
+asserting it (`dull.scaling`, which is in the toolchain precisely because I
+once wrote an exponent in prose that the column underneath me contradicted).
+Writing
+
+```
+k₂_eff(N) ≡ [E(N) − (π/4)N²] / N^{3/2} = k₂ + k_{4/3}N^{−1/6} + k₃N^{−1/2} + …
+```
+
+a dominant N^{4/3} term would make the gap decay as N^{−1/6} = −0.167. Over
+my own ladder plus their N = 10⁵ datum — three decades — the measured
+exponent is about **−0.44**, i.e. the gap is dominated by the ordinary N term,
+as their basis assumes. The N^{4/3} term is real on dimensional grounds and
+small in practice over the accessible range.
 
