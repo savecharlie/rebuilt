@@ -269,3 +269,62 @@ physical argument behind the extra term, and it has three free numbers where
 the present basis has four. If k₂ really is the theoretical value then
 **k_{4/3} ≈ 0.011**, which is stable to 5 % across every subset of my ladder
 and which nobody has reported.
+
+---
+
+## 5. The structure, checked independently — and it looks different at N = 1200
+
+None of the energy expansion sees the *shape* of the thing. `structure.py`
+rebuilds the paper's own diagnostics on my own minimum at N = 1200 (ψ₆ from
+Voronoi neighbours, validated first on a triangular lattice — |ψ₆| = 1.000000
+exactly — and a square one — 0.000000).
+
+![structure at N=1200](structure_N1200.png)
+
+```
+sixfold fraction in the bulk (r<0.85) = 0.9465
+<|psi6|> over all charges             = 0.7626
+<|psi6|> in the bulk                  = 0.8964
+|<psi6>| (global, phase-coherent)     = 0.3042
+   Lavrov & Nikonov at N=1e5:  >0.86,  ~0.914,  |<psi6>| ~ 0.095
+```
+
+**The polycrystal is not there yet.** Their N = 10⁵ orientation map is a set
+of grains with sharp boundaries; mine at N = 1200 is a smooth, continuous
+rotation of the lattice direction around the disk — one crystal under torsion
+— and the five- and seven-fold charges are almost all in the rim layer rather
+than in bulk scars. The globally coherent |⟨ψ₆⟩| is 0.30 against their 0.095,
+which says the same thing: at a thousand charges the disk can still absorb its
+frustration elastically. That is consistent with their reading that the grains
+come from frustration accumulating with size, and it is an independent sighting
+of the mechanism rather than of the result.
+
+*Caveat I should state rather than hide: ψ₆ and the coordination number are
+meaningless for the charges sitting exactly on the rim, whose Voronoi cells
+are unbounded. All the statistics above are taken inside r < 0.85; the picture
+shows everything.*
+
+**The equilibrium measure, read off the configuration rather than assumed.**
+My first version binned the radial density and reported a median 17 % error,
+which looked like a failure of the whole k₁/k₂ derivation. The residuals
+oscillated, which is the signature of discrete concentric rings — the binned
+density was the wrong instrument. The cumulative distribution averages over
+the rings:
+
+```
+charges sitting exactly on the rim: 313 of 1200 (26.1 %)   [2.843 N^(-1/3) = 26.8 %]
+   r      empirical F    arcsine F       diff
+0.4494       0.10042      0.10668     -0.00627
+0.6792       0.25042      0.26608     -0.01566
+0.8739       0.50042      0.51387     -0.01345
+0.9637       0.70042      0.73309     -0.03267
+1/sqrt(N) = 0.02887  <- what a sample of this size can resolve at all
+```
+
+So the arcsine measure describes the interior to within the sampling scale,
+and the entire discrepancy is the mass the continuum spreads near the rim and
+the discrete system puts *on* it — a quarter of all the charges, at this N, in
+a layer no density can represent. Which is the same boundary layer that
+section 4 is about, seen directly. The measured rim fraction, 26.1 %, also
+reproduces Amore & Zárate's empirical N_b formula (26.8 %) from a completely
+independent minimiser.

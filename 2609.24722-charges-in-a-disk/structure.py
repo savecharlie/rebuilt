@@ -65,24 +65,26 @@ def control():
               f"   (want {want:.1f})   mean z = {z[core].mean():.3f}")
 
 
-def radial_density(xy, nbins=26):
+def radial_cdf(xy):
     """Does the configuration actually adopt the arcsine measure?
 
-    Everything in k1 and k2 rests on rho_eq(r) = 1/(2 pi sqrt(1-r^2)).  That is
-    a claim about where the charges go, and it can be read straight off a
-    configuration instead of assumed.
+    My first version binned the radial density and compared bin by bin.  It
+    reported median 17 % error and looked like a failure -- but the residuals
+    OSCILLATED, which is the signature of discrete concentric rings, not of a
+    wrong measure.  The binned density was the wrong instrument.  The
+    cumulative distribution averages over the rings:
+
+        F_arcsine(r) = 1 - sqrt(1 - r^2)
+
+    and the scale a sample of N points can resolve at all is 1/sqrt(N).
     """
-    r = np.hypot(xy[:, 0], xy[:, 1])
-    N = len(xy)
-    edges = np.linspace(0, 1, nbins + 1)
-    cnt, _ = np.histogram(r, bins=edges)
-    area = np.pi * (edges[1:] ** 2 - edges[:-1] ** 2)
-    meas = cnt / area / N
-    mid = 0.5 * (edges[1:] + edges[:-1])
-    # predicted: average of rho_eq over the annulus = [sqrt(1-a^2)-sqrt(1-b^2)]/area
-    pred = (np.sqrt(np.clip(1 - edges[:-1] ** 2, 0, 1))
-            - np.sqrt(np.clip(1 - edges[1:] ** 2, 0, 1))) / area
-    return mid, meas, pred
+    r = np.sort(np.hypot(xy[:, 0], xy[:, 1]))
+    N = len(r)
+    emp = (np.arange(1, N + 1) - 0.5) / N
+    arc = 1.0 - np.sqrt(np.clip(1 - r ** 2, 0, 1))
+    on_rim = int((r > 1 - 1e-9).sum())
+    interior = r < 1 - 1e-9
+    return r, emp, arc, on_rim, interior
 
 
 def analyse(xy, tag):
@@ -100,14 +102,19 @@ def analyse(xy, tag):
     print(f"     total topological charge sum(6-z) in bulk = {int((6-z[bulk]).sum())}")
     print(f"     Lavrov & Nikonov at N=1e5: >0.86, ~0.914, |<psi6>|~0.095")
 
-    mid, meas, pred = radial_density(xy)
-    ok = mid < 0.93
-    rel = np.abs(meas[ok] - pred[ok]) / pred[ok]
-    print(f"     radial density vs arcsine measure (r<0.93): "
-          f"median |rel| = {np.median(rel):.4f}, max = {rel.max():.4f}")
-    print("        r    measured    arcsine     ratio")
-    for m, a, b in list(zip(mid, meas, pred))[::4]:
-        print(f"     {m:5.3f}  {a:9.4f}  {b:9.4f}   {a/b:7.4f}")
+    r, emp, arc, on_rim, interior = radial_cdf(xy)
+    n = len(r)
+    print(f"\n     charges sitting exactly on the rim: {on_rim} of {n} "
+          f"({100*on_rim/n:.1f} %)   [2.843 N^(-1/3) = {100*2.84328*n**(-1/3):.1f} %]")
+    print(f"     sup|F_emp - F_arcsine| over the interior = "
+          f"{np.abs(emp[interior]-arc[interior]).max():.5f}")
+    print(f"     1/sqrt(N) = {1/np.sqrt(n):.5f}  <- what a sample this size can resolve")
+    print("        r      empirical F    arcsine F      diff")
+    for q in (0.1, 0.25, 0.5, 0.7):
+        i = int(q * n)
+        print(f"     {r[i]:6.4f}   {emp[i]:11.5f}  {arc[i]:11.5f}   {emp[i]-arc[i]:+9.5f}")
+    print("     (the deficit is the mass the continuum puts near the rim and the")
+    print("      discrete system puts ON it; no density can represent that layer.)")
 
     fig, axes = plt.subplots(1, 2, figsize=(11.6, 5.8), dpi=170)
     ang = (np.angle(p) % (2 * np.pi)) / 6.0

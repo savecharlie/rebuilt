@@ -31,17 +31,20 @@ that assumption xi_{2,1} = -C_M, the Wigner-crystal Madelung constant
 
     k2 = -C_M * int rho^{3/2} dA = -1.9605158 * 2/sqrt(2 pi) = -1.5642653
 
-As a check on that whole chain I ran it on the SPHERE, where the equilibrium
-measure is uniform and the answer has been known for thirty years:
+against the fitted -1.5628, a relative difference of 9.4e-4. I recomputed C_M
+by Ewald summation rather than quoting it; the answer is independent of the
+splitting parameter to 2.2e-16 over alpha in [1.2, 3.2], and I got it a second
+way from the analytic continuation of the hexagonal Epstein zeta,
+6 zeta(s/2) L_{-3}(s/2) rescaled to covolume 1, which agrees with the Ewald
+sum to 1.1e-16.
+
+As a check on the whole chain I also ran it on the SPHERE, where the
+equilibrium measure is uniform and the answer has been known for thirty years:
 -C_M/(2 sqrt pi) = -0.5530512934 against the accepted -1.1061033/2 =
 -0.5530516500, a relative difference of 6.4e-7 which is the rounding in the
 published eight-digit fit. Nothing about the sphere enters the disk
 calculation, so that checks the constant, the exponent structure and the sign
-at once.
-
-against the fitted -1.5628, a relative difference of 9.4e-4. I recomputed C_M
-by Ewald summation rather than quoting it; the answer is independent of the
-splitting parameter to 2.2e-16 over alpha in [1.2, 3.2].
+at once. (It also implies the sphere coefficient is 1.1061025868.)
 
 With both coefficients pinned, the two-term formula
 
