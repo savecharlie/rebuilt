@@ -58,6 +58,48 @@ def main(path="ladder.json"):
         c, _ = fit(N[sel], E[sel], powers, pin={2.0: K1})
         print(f"  N >= {int(N[lo]):5d}   ({len(N[sel])} points)   "
               f"k2 = {c[1.5]:.6f}   gap to theory {c[1.5]-K2_THEORY:+.6f}")
+    deficit_fit(N, E)
+
+
+def deficit_fit(N, E):
+    """The cleanest statement available: pin BOTH theorems, fit what is left.
+
+        k2_eff(N) = k2 - [ k_{4/3} N^{-1/6} + k3 N^{-1/2} + k4 N^{-1} + ... ]
+
+    so the residual after removing pi/4 and the Madelung term is a pure
+    boundary series with only two or three numbers in it.  Fit it on my own
+    ladder alone and then ask what it says at N = 10^5, which is fifty times
+    past the end of the data and which the fit has never seen.
+    """
+    print("\n" + "=" * 78)
+    print("PIN BOTH THEOREMS, FIT ONLY THE BOUNDARY SERIES")
+    print("=" * 78)
+    N = np.asarray(N, float); E = np.asarray(E, float)
+    keff = -(K1 * N ** 2 - E) / N ** 1.5
+    deficit = K2_THEORY - keff          # positive, shrinking
+    for name, exps in (("N^{4/3} + N", (-1/6, -0.5)),
+                       ("N only (Amore-Zarate basis)", (-0.5,)),
+                       ("N^{4/3} + N + N^{1/2}", (-1/6, -0.5, -1.0))):
+        A = np.stack([N ** e for e in exps], 1)
+        c, *_ = np.linalg.lstsq(A, deficit, rcond=None)
+        pred_def = sum(ci * N ** e for ci, e in zip(c, exps))
+        rms = np.sqrt(((deficit - pred_def) ** 2).mean())
+        # out of sample
+        d5 = sum(ci * LN_N ** e for ci, e in zip(c, exps))
+        E5 = K1 * LN_N ** 2 + (K2_THEORY - d5) * LN_N ** 1.5
+        coef = "  ".join(f"k_{{{1.5+e:.3g}}}={ci:+.5f}" for ci, e in zip(c, exps))
+        print(f"  {name:<28} rms {rms:.2e}   {coef}")
+        print(f"  {'':<28} -> E(1e5) = {E5:.7e}   rel to measured "
+              f"{abs(E5-LN_E)/LN_E:.2e}")
+    print(f"  {'measured (Lavrov-Nikonov)':<28} -> E(1e5) = {LN_E:.7e}")
+    print(f"\n  running coefficient, ladder then their datum:")
+    for n, k in zip(N, keff):
+        print(f"     N={int(n):6d}  k2_eff = {k:.6f}   gap to theory "
+              f"{K2_THEORY-k:+.6f}")
+    k5 = -(K1 * LN_N ** 2 - LN_E) / LN_N ** 1.5
+    print(f"     N={LN_N:6d}  k2_eff = {k5:.6f}   gap to theory "
+          f"{K2_THEORY-k5:+.6f}   <- 31 CPU-hours")
+    print(f"     theory       {K2_THEORY:.6f}")
 
 
 if __name__ == "__main__":

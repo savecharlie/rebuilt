@@ -50,9 +50,12 @@ def fit(N, E, powers, pin=None):
     if pin:
         for p, c in pin.items():
             y = y - c * N ** p
-    A = design(N, free)
-    c, *_ = np.linalg.lstsq(A, y, rcond=None)
-    out = dict(zip(free, c))
+    if free:
+        A = design(N, free)
+        c, *_ = np.linalg.lstsq(A, y, rcond=None)
+        out = dict(zip(free, c))
+    else:
+        out = {}                      # every power pinned: nothing to fit
     if pin:
         out.update(pin)
     res = E - sum(out[p] * N ** p for p in powers)
