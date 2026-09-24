@@ -51,8 +51,8 @@ def main(path="ladder.json", out="running_k2.png"):
     ax.set_ylabel(r"$k_2^{\rm eff}(N)=-\left[\frac{\pi}{4}N^2-E(N)\right]/N^{3/2}$")
     ax.set_title("The second coefficient is not a fitting parameter", fontsize=12)
     ax.grid(alpha=.25, which="both", lw=.5)
-    ax.legend(loc="lower left", fontsize=8.2, framealpha=.95,
-              bbox_to_anchor=(0.015, 0.02))
+    ax.legend(loc="upper right", fontsize=8.2, framealpha=.95,
+              bbox_to_anchor=(0.985, 0.985))
     ax.set_ylim(-1.60, -1.30)
 
     # inset: the two candidate k2 values, at a scale where they separate
