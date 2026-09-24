@@ -1,0 +1,49 @@
+What the neutral latitude actually depends on: the degree-4 part of the figure.
+
+structure_robust.py shows the area-neutral latitude is pinned near the magic
+angle for a spheroid and collapses for a point-mass (Roche) figure.  The two
+differ by 21 degrees at a/c = 1.49.  This file finds the knob.
+
+Write any axisymmetric figure as
+
+    r(phi) / R = 1 + s2 P2(sin phi) + s4 P4(sin phi) + ...
+
+A rotational perturbation is pure degree 2 at first order, so s2 carries the
+flattening and s4 measures how non-spheroidal the figure is.  Measured here:
+
+  1. CONTROL: the numerical pipeline (np.gradient on a sampled shape) must
+     reproduce the analytic closed forms of neutral.py.
+  2. the area-neutral latitude as a function of s4/s2 at fixed s2
+  3. the s4/s2 that the two exact figures actually carry
+
+
+============================================================================
+1. CONTROL: numerical pipeline vs the analytic closed forms
+   a/c=1.05  lon num  33.9576 exact  33.9577 |  lat num  36.6975 exact  36.6973
+   a/c=1.20  lon num  30.5088 exact  30.5090 |  lat num  40.5243 exact  40.5242
+   a/c=1.40  lon num  26.7971 exact  26.7973 |  lat num  42.2483 exact  42.2483
+   worst 1.55e-04 deg
+
+============================================================================
+2. area-neutral latitude vs s4/s2, at fixed s2 (a/c held near 1.3)
+   spheroid at a/c=1.30 has s2 = -0.17625, s4/s2 = -0.13466
+    s4/s2       lon       lat      area
+    -0.30   28.8272   42.3130   36.5985
+    -0.20   29.8673   43.7344   37.4529
+    -0.10   31.0674   45.7613   38.5816
+    +0.00   32.4430   48.7199   40.0749
+    +0.10   33.9908   52.9412   42.0423
+    +0.20   35.6756   58.0845   44.5981
+    +0.30   37.4259   62.8798   47.7989
+   d(area-neutral)/d(s4/s2) = +18.34 deg per unit
+
+============================================================================
+3. s4/s2 of the two exact figures, and the shift it predicts
+   a/c |  spheroid s4/s2   Roche s4/s2 |  predicted d(phi)  measured d(phi)
+  1.10 |        -0.04904      -0.10384 |            -1.005           -1.800
+  1.20 |        -0.09374      -0.20850 |            -2.105           -4.238
+  1.30 |        -0.13466      -0.31095 |            -3.233           -7.705
+  1.40 |        -0.17227      -0.40420 |            -4.254          -12.684
+  1.49 |        -0.20361      -0.46066 |            -4.714          -21.342
+
+dull.watch: 0 FP events

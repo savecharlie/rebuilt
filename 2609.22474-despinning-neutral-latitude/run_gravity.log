@@ -1,0 +1,74 @@
+Effective surface gravity of a rotating figure, pole vs equator -- and what
+that allows for crustal thickness.
+
+Lock (2026) argues the first crust was thicker at the equator than at the poles
+because the depth of melting scales as 1/g, and puts the extreme ratio at "a
+factor of ten" (his Sec. 4.1 and plain-language summary).  A tenfold thickness
+ratio under h ~ 1/g requires g_pole / g_equator = 10.
+
+That ratio is computable exactly for the two limiting structures, so it can be
+bracketed without any equation of state.
+
+MACLAURIN (uniform).  Chandrasekhar's index symbols; the interior field is
+linear, g_i = 2 pi G rho A_i x_i, with
+
+    A_i = a1 a2 a3 Int_0^inf du / [(a_i^2 + u) Delta],   sum A_i = 2
+
+computed here by quadrature and checked against the sum rule and against the
+sphere (A_i = 2/3).
+
+ROCHE (point mass).  g = |grad(GM/r + w^2 r^2 cos^2 phi / 2)| on the figure.
+
+
+========================================================================
+0. CONTROL: index symbols
+   sphere: A1=0.6666666667 A3=0.6666666667  (exact 2/3 = 0.6666666667)
+   e=0.300: 2A1+A3 = 2.000000000000  (sum rule = 2)
+   e=0.600: 2A1+A3 = 2.000000000000  (sum rule = 2)
+   e=0.866: 2A1+A3 = 2.000000000000  (sum rule = 2)
+
+========================================================================
+1. MACLAURIN: effective gravity ratio pole/equator
+    a/c       e |  g_pole/g_eq     (h_eq/h_pol under h~1/g)
+ 1.0001  0.0141 |       1.0001                         1.00
+ 1.2000  0.5528 |       1.2000                         1.20
+ 1.5000  0.7454 |       1.5000                         1.50
+ 1.7161  0.8127 |       1.7161                         1.72
+ 2.0000  0.8660 |       2.0000                         2.00
+ 2.5000  0.9165 |       2.5000                         2.50
+ 2.7198  0.9300 |       2.7198                         2.72
+ 3.0000  0.9428 |       3.0000                         3.00
+
+   The Maclaurin sequence's own landmarks:
+     max omega^2 at e=0.929956, a/c=2.7198
+     Jacobi bifurcation at e=0.812670, a/c=1.7161
+     uniform body: g_eq at a/c = [ 7.1 10.  15.8 22.4 31.6]
+                        = [0.06212 0.03702 0.01822 0.01052 0.00602]
+     pre-asymptotic exponent here: -1.5612  (A3 is still only 1.951 of its limit 2)
+     asymptotic:  -1.6607228111470864  <- g_eq = 2 pi G rho A3 c^2/a ~ (a/c)^-5/3; never zero, so NO g_eq=0 limit
+
+========================================================================
+2. ROCHE: effective gravity ratio pole/equator
+         q     a/c |  g_pole/g_eq
+  0.000001  1.0000 |       1.0000
+  0.050000  1.0271 |       1.1153
+  0.100000  1.0595 |       1.2740
+  0.200000  1.1535 |       1.9197
+  0.280000  1.3276 |       5.1102
+  0.296000  1.4733 |      40.5903
+  0.296296  1.4999 |   22360.1790
+   -> the point-mass limit reaches ANY gravity ratio, because g_eq -> 0
+      at break-up -- but only at a/c = 3/2, where the figure ceases to exist.
+      So the two limiting structures disagree about the ceiling by 15x in a/c
+      and by infinity in gravity ratio.  Nothing here is geometry.
+
+========================================================================
+3. The paper's stated numbers
+   'equatorial surface gravity as low as ~4 m/s^2' at ~2.7 L_EM
+   'equatorial gravity of only ~8 m/s^2' in the canonical case
+   polar gravity 'somewhat increased' over the non-rotating 9.8 m/s^2
+     with g_pole = 10.0:  ratio at g_eq=4 is 2.50,  at g_eq=8 is 1.25
+     with g_pole = 11.0:  ratio at g_eq=4 is 2.75,  at g_eq=8 is 1.38
+     with g_pole = 12.0:  ratio at g_eq=4 is 3.00,  at g_eq=8 is 1.50
+
+dull.watch: 0 FP events

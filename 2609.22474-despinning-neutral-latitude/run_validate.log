@@ -1,0 +1,18 @@
+[ok ] meridian quarter-arc from Eq.3                       got  1.672795108       want  1.672795108       rel 1.33e-16  vs a*E(e^2)
+[ok ] surface area from Eqs.3-5                            got  16.06065217       want  16.06065217       rel 0.00e+00  vs exact oblate area
+[ok ] analytic dr/dphi                                     got  3.298328277e-10   want  0                 rel 3.30e-10  max abs diff (see next)
+[ok ] volume preserved at f=0.0                            got  4.188790205       want  4.188790205       rel 0.00e+00  a/c=1.0000
+[ok ] volume preserved at f=0.1                            got  4.188790205       want  4.188790205       rel 0.00e+00  a/c=1.1111
+[ok ] volume preserved at f=0.3                            got  4.188790205       want  4.188790205       rel 2.12e-16  a/c=1.4286
+[ok ] volume preserved at f=0.5                            got  4.188790205       want  4.188790205       rel 2.12e-16  a/c=2.0000
+[ok ] Maclaurin: e at max omega^2                          got  0.9299556821      want  0.9299514         rel 4.60e-06  Chandrasekhar
+[ok ] Maclaurin: max omega^2/(pi G rho)                    got  0.4493314121      want  0.4493            rel 6.99e-05  
+[ok ] Maclaurin small-e: f/q                               got  1.250013434       want  1.25              rel 1.07e-05  = 5/4 exactly
+[ok ] Darwin-Radau homogeneous lam                         got  1.25              want  1.25              rel 1.78e-16  
+[ok ] Earth f from C/MR^2=0.3307                           got  298.9878166       want  298.257           rel 2.45e-03  observed 1/298.257 (WGS84)
+[ok ] Roche: q->0 is a sphere                              got  1                 want  1                 rel 5.00e-13  
+[ok ] Roche: break-up q=8/27 -> a/c = 3/2                  got  1.499999991       want  1.5               rel 6.16e-09  double root: np.roots loses half the digits
+
+dull.watch: 0 FP events during the geometry pass
+
+14/14 validation checks pass

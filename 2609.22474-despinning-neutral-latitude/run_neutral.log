@@ -1,0 +1,68 @@
+The neutral latitude of despinning strain: exact, and checked against brute force.
+
+Lock (2026) computes, for each of a sequence of HERCULES equilibrium figures, the
+change in the local line elements (his Eqs. 3-5) at fixed latitude, and reports
+that the sign of the area change flips "poleward of about 20-40 degrees".
+
+That band has a closed form.  For a volume-preserving oblate spheroid of
+flattening f (u = 1 - f = c/a):
+
+  LONGITUDINAL (E-W, his Eq. 4):     tan^2 phi_0 = u^2 / 2
+  LATITUDINAL  (N-S, his Eq. 3):     tan^2 phi_0 = u^2 [7 - 8u^2 + sqrt(64u^4 - 104u^2 + 49)] / 4
+
+Both reduce to tan^2 phi = 1/2, phi = 35.2644 deg, at u = 1 -- the zero of the
+Legendre polynomial P2, which is where they have to be, because a rotational
+figure perturbation is pure degree 2.  Flattening splits them, and it splits them
+in OPPOSITE directions.
+
+For a FINITE change from u1 to u2 (which is what his Fig. 4 plots -- cumulative,
+not instantaneous) the longitudinal condition is still exactly solvable:
+
+  tan^2 phi_0 = 1 / [A B (A + B)],   A = u1^{-2/3}, B = u2^{-2/3}
+
+which collapses to u^2/2 when u1 = u2.
+
+
+==============================================================================
+1. INSTANTANEOUS closed forms vs brute force (df = 1e-6)
+     f     a/c |  lon exact  lon brute |  lat exact  lat brute
+  0.00  1.0000 |   35.26439   35.26438 |   35.26439   35.26440
+  0.05  1.0526 |   33.89129   33.89127 |   36.77542   36.77544
+  0.10  1.1111 |   32.47252   32.47250 |   38.47147   38.47148
+  0.20  1.2500 |   29.49621   29.49619 |   41.29436   41.29437
+  0.30  1.4286 |   26.33425   26.33423 |   42.26306   42.26306
+  0.40  1.6667 |   22.98977   22.98975 |   41.30045   41.30044
+  0.50  2.0000 |   19.47122   19.47120 |   38.59985   38.59984
+  0.60  2.5000 |   15.79317   15.79315 |   34.20511   34.20509
+   worst disagreement: 2.44e-05 deg
+
+==============================================================================
+2. The two neutral latitudes COINCIDE at f=0 and SPLIT in opposite directions
+   f=0     : lon 35.2644  lat 35.2644   (arctan(1/sqrt2) = 35.264390, the zero of P2)
+   f=0.5   : lon 19.4712  lat 38.5999
+   arcsin(1/3) = 19.471221 deg  <- the f=0.5 longitudinal value, exactly
+   latitudinal neutral latitude PEAKS at f = 0.298153 (a/c = 1.4248), phi = 42.2634 deg
+
+==============================================================================
+3. CUMULATIVE change to the present day (f_now = 1/298.257)
+ f_init     a/c |  lon exact  lon brute |  lat brute area brute
+  0.010  1.0101 |   35.08348   35.08348 |   35.44821   35.26525
+  0.050  1.0526 |   34.52806   34.52806 |   36.04894   35.27986
+  0.100  1.1111 |   33.80236   33.80236 |   36.89018   35.32027
+  0.200  1.2500 |   32.23342   32.23342 |   38.66931   35.43041
+  0.300  1.4286 |   30.48003   30.48003 |   40.10442   35.44183
+  0.400  1.6667 |   28.49862   28.49861 |   40.77642   35.13180
+  0.500  2.0000 |   26.22779   26.22779 |   40.53120   34.27724
+
+==============================================================================
+4. Magnitudes: cumulative fractional change in local AREA
+ f_init |   equator    45 deg      pole
+  0.010 |    -0.45%     0.22%     0.90%
+  0.050 |    -3.15%     1.61%     6.60%
+  0.100 |    -6.57%     3.46%    14.57%
+  0.200 |   -13.63%     7.73%    34.05%
+  0.300 |   -20.99%    13.28%    60.17%
+  0.400 |   -28.70%    21.45%    96.72%
+  0.500 |   -36.86%    34.90%   150.86%
+
+dull.watch: 0 FP events

@@ -1,0 +1,43 @@
+Does the neutral latitude depend on the interior structure?
+
+The closed forms in neutral.py are for an oblate SPHEROID -- exactly the figure
+of a homogeneous (Maclaurin) body.  Earth is centrally condensed (C/MR^2 = 0.331
+against 0.4 for uniform), so its equipotential surface is not a spheroid: it
+carries degree-4 and higher terms, and HERCULES resolves them (Lock truncates at
+degree 12).  So the question the closed form cannot answer by itself is whether
+the neutral latitude is a property of the geometry or of the interior.
+
+Two exact extremes bracket every real body:
+
+  MACLAURIN  uniform density, C/MR^2 = 2/5, surface is exactly a spheroid
+  ROCHE      all mass at the centre, C/MR^2 -> 0, surface from GM/r + w^2 r^2 cos^2/2
+
+Compared here at EQUAL a/c and equal enclosed volume.  The Roche model cannot
+reach a/c > 3/2 (it breaks up at q = 8/27), which is itself worth saying out loud
+about a paper whose extreme case is a/c = 2.
+
+
+   a/c |        MACLAURIN (spheroid)        |         ROCHE (point mass)        
+       |        lon        lat       area |        lon        lat       area
+  1.02 |    34.7246    35.8281    35.2713 |    34.3882    35.4969    34.9379
+  1.05 |    33.9511    36.7051    35.3029 |    33.0858    35.8557    34.4526
+  1.10 |    32.7274    38.1694    35.3898 |    30.8964    36.2790    33.5897
+  1.20 |    30.5027    40.5297    35.5582 |    26.3853    35.5175    31.3198
+  1.30 |    28.5370    41.8126    35.5552 |    21.5209    32.3688    27.8499
+  1.40 |    26.7915    42.2487    35.3154 |    15.8230    26.8542    22.6310
+  1.49 |    25.3820    42.1721    34.9183 |     7.5495    16.8625    13.5767
+
+area-neutral latitude, Maclaurin vs Roche, same a/c:
+   a/c= 1.02  spheroid  35.2713   Roche  34.9379   diff -0.3334 deg
+   a/c= 1.05  spheroid  35.3029   Roche  34.4526   diff -0.8503 deg
+   a/c= 1.10  spheroid  35.3898   Roche  33.5897   diff -1.8001 deg
+   a/c= 1.20  spheroid  35.5582   Roche  31.3198   diff -4.2384 deg
+   a/c= 1.30  spheroid  35.5552   Roche  27.8499   diff -7.7052 deg
+   a/c= 1.40  spheroid  35.3154   Roche  22.6310   diff -12.6844 deg
+   a/c= 1.49  spheroid  34.9183   Roche  13.5767   diff -21.3416 deg
+
+Roche model ceiling: the figure of a fully centrally-condensed body
+   break-up at q = 8/27 = 0.29629630, a/c = 1.49999841  (exactly 3/2)
+   -> a body this condensed CANNOT reach the a/c = 2 of the paper's 2.7 L_EM case.
+
+dull.watch: 0 FP events
