@@ -1,0 +1,25 @@
+Is best_homogeneous_L actually at the minimum?  (it must be, to 1e-6:
+a 1% error changes the measured exponent from -1.34 to -1.04.)
+
+     1-2d       b*_hom      Lmax(b*)  worse at 1e-6?  worse at 1e-9?
+  0.02000  1.372831638  -0.637413881            True           False
+  0.00100  1.407892215  -0.697492232            True            True
+  0.00010  1.412834198  -0.705031628            True            True
+
+full optimisation vs the homogeneous optimum, SEEDED AT IT so the
+optimiser can never report a loss (the first run was not, and reported
+'-23%' on complete N=6, which was Nelder-Mead losing, not a finding).
+
+  N  delta    b*_hom    Lmax hom    Lmax het     gain   spread
+  4   0.00   2.48257   -0.325411   -0.763111 134.506%   1.4866
+  4   0.25   2.00000   -0.500000   -0.801361  60.272%   0.5049
+  4   0.40   1.88571   -0.700239   -0.874116  24.831%   0.1946
+  4   0.49   1.95755   -0.931242   -0.975114   4.711%   0.0690
+  4   0.50   2.00000   -1.000000   -1.000000   0.000%   0.0000
+  6   0.00   2.46284   -0.147052   -0.561111 281.573%   1.5621
+  6   0.25   1.64718   -0.255002   -0.563654 121.039%   0.7315
+  6   0.40   1.35608   -0.415779   -0.594138  42.898%   0.4497
+  6   0.49   1.37283   -0.637414   -0.681183   6.867%   0.1031
+  6   0.50   1.41421   -0.707107   -0.707107   0.000%   0.0000
+
+[exited with code 0]

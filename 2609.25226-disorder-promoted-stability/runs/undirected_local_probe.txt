@@ -1,0 +1,10 @@
+network          b*_hom       Lmax   best descent found over radii 1e-1..1e-5
+ring N=4        2.82843  -1.414214   gain 1.594e-08 at radius 1e-05
+ring N=6        2.00000  -1.000000   NONE (< 1e-13)
+ring N=8        1.53073  -0.765367   NONE (< 1e-13)
+complete N=4    4.00000  -2.000000   NONE (< 1e-13)
+complete N=6    4.89898  -2.449490   NONE (< 1e-13)
+complete N=8    5.65685  -2.828427   NONE (< 1e-13)
+
+~7500 directions per network, radii spanning 1e-1 to 1e-5, including every
+pairwise e_a - e_b and non-trace-free directions.

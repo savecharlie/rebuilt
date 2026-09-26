@@ -1,0 +1,12 @@
+  ok   homogeneous 2nd-order spectrum == roots of s^2+bs+mu  max |num-pred| = 1.69e-14
+  ok   best homogeneous damping == 2 sqrt(mu_2)  rel err 1.2e-04
+  ok   and it gives Lambda_max == -sqrt(mu_2)  abs err 2.0e-04
+  ok   1D Jacobian is Hermitian for undirected A
+  ok   1D spectrum is real
+  ok   2D Jacobian is NOT Hermitian
+  ok   2nd-order Kuramoto has exactly one zero eigenvalue
+  ok   lam_max drops it  -0.6500
+  ok   lam_max WITHOUT dropping it is 0
+  ok   spring-mass (k>0) has no zero eigenvalue
+  ok   lam_max leaves it alone
+SELFTEST PASS
