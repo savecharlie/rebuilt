@@ -1,0 +1,140 @@
+### validate_instrument.py
+A. vacuum parabola (kD = kL = 0)
+  [ok ] flight time v0=50 th=30                        got 5.09858106488964  want 5.09858106488964   rel 3.48e-16
+  [ok ] range      v0=50 th=30                         got 220.775036272437  want 220.775036272437   rel 2.57e-16
+  [ok ] path length v0=50 th=30                        got 232.490098109551  want 232.490098109584   rel 1.44e-13
+  [ok ] flight time v0=30 th=60                        got 5.29860087053849  want 5.29860087053849   rel 3.35e-16
+  [ok ] range      v0=30 th=60                         got 79.4790130580774  want 79.4790130580774   rel 1.79e-16
+  [ok ] path length v0=30 th=60                        got 109.694787742344  want 109.694787742407   rel 5.80e-13
+  [ok ] flight time v0=120 th=15                       got 6.33412743644414  want 6.33412743644415   rel 7.01e-16
+  [ok ] range      v0=120 th=15                        got 734.195673344108  want 734.195673344108   rel 7.74e-16
+  [ok ] path length v0=120 th=15                       got 742.888882357123  want 742.888882356583   rel 7.27e-13
+  [ok ] flight time v0=10 th=80                        got 2.00844886482582  want 2.00844886482582   rel 0.00e+00
+  [ok ] range      v0=10 th=80                         got 3.48763485314219  want 3.48763485314219   rel 5.09e-16
+  [ok ] path length v0=10 th=80                        got 10.7913462836148  want 10.7913462836172   rel 2.23e-13
+
+B. 1-D fall, quadratic drag (analytic tanh)
+  [ok ] v(t=1.0)                                       got -9.49817678197448  want -9.49817678197449   rel 1.87e-16
+  [ok ] z(t=1.0)                                       got -4.82521833928856  want -4.82521833928853   rel 4.60e-15
+  [ok ] v(t=5.0)                                       got -28.6960762187975  want -28.6960762187973   rel 4.46e-15
+  [ok ] z(t=5.0)                                       got -91.5355349677025  want -91.5355349677027   rel 1.86e-15
+  [ok ] v(t=20.0)                                      got -31.3153438452104  want -31.3153438452105   rel 3.06e-15
+  [ok ] z(t=20.0)                                      got -556.997069094683  want -556.997069094683   rel 0.00e+00
+
+C. horizontal coast, quadratic drag, g = 0, kL = 0
+  [ok ] v(t=0.5)                                       got 45.4545454545455  want 45.4545454545455   rel 0.00e+00
+  [ok ] x(t=0.5)                                       got 23.8275449510812  want 23.8275449510812   rel 4.47e-16
+  [ok ] s(t=0.5)                                       got 23.8275449510812  want 23.8275449510812   rel 4.47e-16
+  [ok ] v(t=4.0)                                       got 27.7777777777778  want 27.7777777777778   rel 1.79e-15
+  [ok ] x(t=4.0)                                       got 146.946666225529  want 146.94666622553   rel 2.51e-15
+  [ok ] s(t=4.0)                                       got 146.946666225529  want 146.94666622553   rel 2.51e-15
+  [ok ] v(t=30.0)                                      got 7.14285714285719  want 7.14285714285714   rel 5.97e-15
+  [ok ] x(t=30.0)                                      got 486.477537263827  want 486.477537263828   rel 2.22e-15
+  [ok ] s(t=30.0)                                      got 486.477537263827  want 486.477537263828   rel 2.22e-15
+
+instrument validated on 3 independent closed forms. Proceed.
+
+### check_invariants.py
+=== IV.1  dpsi/ds = kL, pointwise along the path ===
+  baseball, drag off                                   max dev 3.33e-16   
+  baseball, drag on                                    max dev 4.44e-16   
+  frisbee, drag off                                    max dev 4.44e-16   
+  frisbee, drag on                                     max dev 4.44e-16   
+  tabletennis, drag off                                max dev 4.44e-16   
+  tabletennis, drag on                                 max dev 4.44e-16   
+
+=== IV.1  a 180 deg turn costs exactly pi*L_L ===
+  S(180 deg) / (pi L_L) - 1, drag ON, 60 launches      max dev 8.88e-16   pi L_L = 65.321053 m
+
+=== IV.2  |w| = |w0| exp(-mu * dpsi) ===
+  baseball (mu = 1.750)                                max dev 3.76e-13   
+  soccer (mu = 1.000)                                  max dev 1.07e-12   
+  tabletennis (mu = 1.500)                             max dev 1.33e-12   
+  golf (mu = 1.000)                                    max dev 8.30e-13   
+  tennis (mu = 2.200)                                  max dev 6.73e-13   
+  frisbee (mu = 0.333)                                 max dev 1.32e-12   
+
+=== IV.3  R_h = L_L cos(gamma) ===
+  baseball, drag off                                   max dev 7.77e-16   
+  baseball, drag on                                    max dev 6.66e-16   
+  soccer, drag off                                     max dev 6.66e-16   
+  soccer, drag on                                      max dev 6.66e-16   
+  frisbee, drag off                                    max dev 6.66e-16   
+  frisbee, drag on                                     max dev 6.66e-16   
+
+=== IV.4  g = 0 : the ground track is a circle of radius L_L ===
+  baseball, drag off                                   max dev 2.87e-12   R=281.267705307  L_L=281.267705306  speed 50 -> 50.000
+  baseball, drag on                                    max dev 5.15e-14   R=281.267705306  L_L=281.267705306  speed 50 -> 0.205
+  frisbee, drag off                                    max dev 3.02e-12   R=20.792336938  L_L=20.792336938  speed 50 -> 50.000
+  frisbee, drag on                                     max dev 2.63e-14   R=20.792336938  L_L=20.792336938  speed 50 -> 17.546
+
+=== summary ===
+  23 checks, largest relative deviation 3.02e-12
+
+### wind_bias.py
+A. the shape is a pure sine in the wind bearing
+   amplitude 2.4515   residual from sin(alpha): 2.24% of it
+
+B. the amplitude is mu + 1/mu, and the residual is (1/2) mu dpsi
+       mu       amp   mu+1/mu   rel err  err/(mu dpsi)
+     0.50    2.5392    2.5000     1.57%         0.4864
+     1.00    2.0638    2.0000     3.19%         0.5023
+     1.50    2.2707    2.1667     4.80%         0.5117
+     2.00    2.6600    2.5000     6.40%         0.5193
+     3.00    3.6523    3.3333     9.57%         0.5328
+     4.00    4.7898    4.2500    12.70%         0.5452
+
+C. a longer flight does not help -- the amplitude grows
+    theta  T (s)  dpsi(deg)       amp
+        0   0.46       3.56    2.4515
+        0   1.50      10.64    2.7282
+       20   3.00      18.10    3.0451
+       30   4.60      25.32    3.3716
+       45   6.50      33.01    3.7363
+
+D. LAW 22: the claim is exact as dpsi -> 0, so test its CONVERGENCE
+     dpsi (rad)        amp   rel err  halving ratio
+        0.08482   2.500287     7.70%              -
+        0.04383   2.412416     3.92%          1.966
+        0.02232   2.367314     1.98%          1.983
+        0.01127   2.344454     0.99%          1.993
+        0.00566   2.332963     0.50%          1.996
+        0.00284   2.327202     0.25%          1.998
+   -> 2.000 per halving: first order, exactly as (*) requires.
+
+### what_breaks_it.py
+
+=== fly ball (baseball), true mu = 1.750 [noiseless; every deviation below is bias] ===
+  control (vertical axis, still air)        mu-hat = 1.749508   err 2.8e-04
+  spin axis tilted from vertical:
+      1 deg   worst over azimuth:   0.36% error in mu
+      2 deg   worst over azimuth:   0.73% error in mu
+      5 deg   worst over azimuth:   2.16% error in mu
+     10 deg   worst over azimuth:   5.31% error in mu
+  steady horizontal wind:
+     0.5 m/s  worst at bearing 270 deg: mu-hat =  1.8302  (  4.58% error)
+     1.0 m/s  worst at bearing 270 deg: mu-hat =  1.9174  (  9.56% error)
+     2.0 m/s  worst at bearing 270 deg: mu-hat =  2.1145  ( 20.83% error)
+     5.0 m/s  worst at bearing 270 deg: mu-hat =  2.9974  ( 71.28% error)
+  C_L saturating in the spin parameter, C_L = C_L0 /(2+1/S) * 3:
+    omega =   50 rad/s (S0 = 0.041)   mu-hat =  1.1475  ( 34.43% error)
+    omega =  150 rad/s (S0 = 0.122)   mu-hat =  1.2297  ( 29.73% error)
+    omega =  400 rad/s (S0 = 0.325)   mu-hat =  1.3617  ( 22.19% error)
+
+=== free kick (soccer), true mu = 1.000 [noiseless; every deviation below is bias] ===
+  control (vertical axis, still air)        mu-hat = 0.999146   err 8.5e-04
+  spin axis tilted from vertical:
+      1 deg   worst over azimuth:   0.13% error in mu
+      2 deg   worst over azimuth:   0.13% error in mu
+      5 deg   worst over azimuth:   0.72% error in mu
+     10 deg   worst over azimuth:   2.53% error in mu
+  steady horizontal wind:
+     0.5 m/s  worst at bearing 270 deg: mu-hat =  1.0447  (  4.47% error)
+     1.0 m/s  worst at bearing 270 deg: mu-hat =  1.0926  (  9.26% error)
+     2.0 m/s  worst at bearing 270 deg: mu-hat =  1.1959  ( 19.59% error)
+     5.0 m/s  worst at bearing 270 deg: mu-hat =  1.5880  ( 58.80% error)
+  C_L saturating in the spin parameter, C_L = C_L0 /(2+1/S) * 3:
+    omega =   50 rad/s (S0 = 0.196)   mu-hat =  0.8494  ( 15.06% error)
+    omega =  150 rad/s (S0 = 0.589)   mu-hat =  0.9042  (  9.58% error)
+    omega =  400 rad/s (S0 = 1.571)   mu-hat =  0.9496  (  5.04% error)
+
