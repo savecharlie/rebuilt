@@ -1,0 +1,51 @@
+==========================================================================
+1. THE HEADLINE: the limit does not depend on r
+proliferation rate r(x)                  ||u(T)-U*psi||_1        U(T)
+paper's sigmoid (fast right well)               1.433e-07   1.0000000
+reversed  (fast LEFT well)                      1.433e-07   1.0000000
+flat r = 1                                      1.433e-07   1.0000000
+spiky at x=0.25                                 1.433e-07   1.0000000
+quiescent left half (r=0 there)                 1.433e-07   1.0000000
+time-dependent r(x,t) surrogate                 1.433e-07   1.0000000
+  -> six wildly different fitness landscapes, one limit: U* psi.  [Thm A]
+
+==========================================================================
+2. THE RATE: the imprint decays at the spectral gap
+  spectral gap lambda_1           = 0.065975      [paper: ~0.066]
+  measured decay rate of ||p-psi|| = 0.066398     [paper: 0.0660]
+  ratio                            = 1.006410   (max |resid| over 220 time units = 3.15e-01)
+
+==========================================================================
+3. CONTRAST: additive competition does NOT forget
+  uniform  ||p-psi|| at t=400 = 1.433e-07
+  additive ||p-psi|| at t=400 = 1.3068   (it converges, but NOT to psi)
+  ||p_additive(400) - principal eigenfunction of (L+r)||_1 = 8.915e-13   [Rem. 6.7]
+
+==========================================================================
+4. HOW BIG DOES IT GET?  The ceiling the theorem does not give.
+   Claim: in the no-mixing limit p -> psi*e^{r s*}/M(s*), where the
+   selection time s* solves K(s*) = ln(U*/U0), K = cumulant generating
+   function of fitness r under psi.
+  s* = 2.87593,  ceiling ||p-psi||_1 = 1.3426
+  paper's bound 2|ln(U*/U0)| = 9.21  (vacuous: L1 between densities is <= 2)
+
+    lambda_1  eps=rbar/lam  peak ||p-psi||  % of ceiling  ||peak-ceil||
+     1.94575          0.52          0.3448         32.9%         0.7050
+     0.93253          1.05          0.5684         52.6%         0.5151
+     0.39743          2.29          0.8381         73.1%         0.3135
+     0.06598         10.76          1.2571         93.6%         0.0920
+     0.00426        104.74          1.6013         99.3%         0.0136
+     0.00012       2071.56          1.8211        100.0%         0.0011
+     0.00000     101842.04          1.9243        100.0%         0.0002
+     0.00000    6493546.32          1.9545        100.0%         0.0001
+  -> the peak rises monotonically to the ceiling and never crosses it.
+
+==========================================================================
+5. THE SIGN: a SHRINKING population enriches for the SLOWEST phenotypes.
+   s* has the sign of ln(U*/U0).  Start above carrying capacity:
+  U0=   0.01  s*= +2.8759   measured mean-fitness shift at peak =  +1.1904   predicted  +1.2685
+  U0=   0.50  s*= +0.6908   measured mean-fitness shift at peak =  +0.5025   predicted  +0.5931
+  U0=   2.00  s*= -2.9765   measured mean-fitness shift at peak =  -0.4885   predicted  -0.6044
+  U0= 100.00  s*=-41.8262   measured mean-fitness shift at peak =  -0.6075   predicted  -0.6096
+
+wrote verify_results.json
