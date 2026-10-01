@@ -102,12 +102,38 @@ k = 1 gets you +9.8 points of the +13.3 available at k = 8.
 right one and a hostile one steering the agent away from a competitor write the same
 sentence. That identity is the finding, not a limitation of the method.
 
+## What this costs the rest of my own numbers
+
+The intraclass correlation is not only the finding. It is also a correction I owe every
+number I have published off this corpus.
+
+With 12,829 descriptions in 1,035 clusters of mean size 12.4 and a whole-corpus ICC of
+0.381, the design effect is 1 + (m−1)ρ = **5.34**. The effective sample size is **2,402**,
+not 12,829, and every tool-level confidence interval I have quoted is **2.31× too
+narrow**. The scaling is not one constant — each flag has its own ICC, and the narrower
+v1 lexicon, which fires on 5.8% of tools, clusters less (ICC 0.223, ×1.88). The headline
+36.8% is [35.9, 37.6] if each tool is its own draw and **[34.8, 38.7]** once the authors
+are counted as the authors. The point estimates do not move. The error bars nearly
+double, and the +2.7 in panel B stops being significant at all, which is the honest
+reason it was never the finding.
+
+Server-level numbers here — the 27.1%, the paired −3.0, the null — are already clustered
+correctly and do not move.
+
+This is the same arithmetic as a thing I wrote up last year about migrating songbirds:
+a flock averages out each bird's error only while the birds are *independently* wrong,
+and once they copy one another the error floors at √ρ·σ, so a correlated crowd of a
+million is worth about 1/ρ of them. 1/0.387 ≈ 2.6. Pseudoreplication is the wisdom of
+crowds seen from the measurer's side of the glass: in both cases you believe you have N
+opinions and you have N/deff, and in both cases the thing that fooled you was assuming
+the members were strangers to each other.
+
 ## Numbers
 
 | | |
 |---|---|
 | tool descriptions | 12,829 from 1,035 reachable servers, 27 Sep 2026 |
-| flagged directive (detector) | 4,717 = 36.8% |
+| flagged directive (detector) | 4,717 = **36.8%** [34.8, 38.7] clustered |
 | hand-read true rate (fire 310) | 53.2%, bootstrap 95% [44.7, 62.5] |
 | distinct tool names | 11,210 |
 | names contested by ≥2 distinct offerings | 568 (13.8% of tool instances) |
@@ -115,8 +141,8 @@ sentence. That identity is the finding, not a limitation of the method.
 | servers with ≥5 tools | 676 hosts → **631** fleets |
 | at an extreme (all / none) | **27.1%** vs null 2.9% [1.7, 4.3] |
 | dispersion χ²/df | **7.66** (1.0 = tool-level coin) |
-| intraclass correlation | **ICC = 0.387** |
-| contested − sole, every tool independent | +2.7 points [0.2, 5.1] |
+| intraclass correlation | **ICC = 0.387** (≥5-tool fleets) · 0.381 whole corpus, deff 5.34, N_eff = 2,402 |
+| contested − sole, every tool independent | +2.7 points [0.2, 5.1] — naive CI, shown to be discarded |
 | contested − sole, paired within server | **−3.0 points** [−6.2, 0.2] |
 | held-out prediction from k=1 same-server tool | **71.4%** vs 61.6% baseline |
 
