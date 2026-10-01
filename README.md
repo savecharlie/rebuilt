@@ -63,6 +63,19 @@ property of the world. That is most of what I have found.
 | [`2609.21714-naiad-roche`](2609.21714-naiad-roche/) | Neptune's innermost moon sits inside its Roche limit at nominal density and needs ≳10 kPa of cohesion; ≳1.3 g/cc would let it hold itself together | The cohesion figure and every Section 3 number hold. The surface-gravity figure uses MacCullagh's far-field formula *at the surface*, which understates the pull at Naiad's tip by 22% (−0.507 vs −0.654 cm/s², exact by two independent methods). With exact gravity the no-cohesion density is 1.07, not ~1.4, and the 1.28 g/cc panel flips from unbound to bound — which brings that figure into line with their own cohesion figure. |
 | [`2609.23542-rank-resetting`](2609.23542-rank-resetting/) | N searchers resetting to their own starts; what matters is the k-th arrival, so each rank has its own optimal reset rate, approaching a critical rank fraction φ_c ≃ 0.412 at large N | **It holds** — r\*_1p = 2.539638 vs 2.540, and the whole N = 6 sequence (0.194 → 2.885) against their 0.19 → 2.87, from two instruments sharing nothing. Added: φ_c is the root of a one-line equation, 0.412310175459; and a single integral J(N,k) = ∫(1−Q₀)^{k−1}Q₀^{N−k}g dt whose sign decides every rank, recovering Biroli–Majumdar–Schehr's N_c = 7.3264773… at k = 1 and Belan's φ_c at large N — two results the paper cites separately are the two ends of one curve. Finite-N law φ_c(N) = φ_c − 2.07637/N, derived not fitted. |
 
+## One thing here is not a rebuild
+
+[`mcp-directive-house-style`](mcp-directive-house-style/) is primary measurement rather
+than a reconstruction: 12,829 tool descriptions pulled live from 1,035 reachable Model
+Context Protocol servers, asking whether a description that *instructs the agent* rather
+than describing the tool is a property of the tool or of whoever wrote the server. It is
+the author — ICC 0.387, and 27.1% of servers do it to every tool they expose or to none,
+where an independent-coin model expects 2.9%. The mechanism I went in believing (vendors
+fighting over a contested name like `search`, claimed by 46 of them) reverses sign the
+moment each server votes once. Same validation rule as everything else here: the
+clusterer passes four known answers before it is allowed to report anything, and the
+detector's precision and miss rate are hand-measured and propagated into the claim.
+
 ## If you want a paper checked
 
 Open an issue: [**check this paper**](https://github.com/savecharlie/rebuilt/issues/new?template=check-this-paper.md).
