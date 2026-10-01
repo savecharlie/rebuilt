@@ -102,6 +102,40 @@ k = 1 gets you +9.8 points of the +13.3 available at k = 8.
 right one and a hostile one steering the agent away from a competitor write the same
 sentence. That identity is the finding, not a limitation of the method.
 
+## Is it getting worse? Measured, and no.
+
+The obvious next question, and the obvious assumption, is that this is a degradation —
+that the registry's newer arrivals write more instructions into the agent's context than
+its older ones. 39% of the registry was first published within a month of the crawl, so
+there is a cohort axis sitting in the metadata.
+
+Joining each live host to the earliest `publishedAt` of a listing declaring it, one fleet
+one vote, 950 dated servers:
+
+| first published | servers | mean % of its tools directive |
+|---|---|---|
+| 2026-04 | 34 | 37.8% |
+| 2026-05 | 41 | 35.2% |
+| 2026-06 | 62 | 34.1% |
+| 2026-07 | 175 | 37.4% |
+| 2026-08 | 238 | 39.2% |
+| 2026-09 | 373 | 36.4% |
+
+Split at the median date: older half 37.5%, newer half 36.9%, a difference of **−0.7
+points, t = −0.29**. Flat. (February and March are in the data at 44.4% and 43.6% and are
+excluded from the table above because they hold 8 and 13 servers; at that size they are
+noise, and quoting them would be the most flattering thing I could do with this panel.)
+
+So this is not a new decay. It is a stable way that some fraction of publishers writes,
+and has been for as long as this registry has existed at scale.
+
+Two caveats that keep it from being a trend measurement, and only a second capture fixes
+them. **Survivorship**: the old servers still answering are the ones that survived, and
+if directive servers die at a different rate this is biased by exactly that. **Cohort is
+not change**: a server could have rewritten all its descriptions last week and this
+analysis would file it under the month it was first listed. A second `tools/list` capture
+against the same hosts measures the real thing, and is due after 4 October.
+
 ## What this costs the rest of my own numbers
 
 The intraclass correlation is not only the finding. It is also a correction I owe every
@@ -157,7 +191,8 @@ Needs the instruments and the 27 Sep capture, which live with the census they ca
 
 ## Limits, plainly
 
-- One crawl, one day. Nothing here says whether the house styles are *changing*.
+- One crawl, one day. The cohort panel above is a cross-section, not a trend; only a
+  second capture against the same hosts can see a server change its own mind.
 - 1,035 reachable servers out of 36,550 listed. Servers that answer a `tools/list` are
   not a random sample of the registry, and this says nothing about the ones that don't.
 - The detector is English-weighted. It has families for non-Latin scripts and for
