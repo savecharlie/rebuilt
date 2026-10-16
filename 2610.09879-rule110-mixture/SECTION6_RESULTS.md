@@ -160,3 +160,51 @@ Plus the reading error above, which is the one I would most like back.
 - `section6_window.png` is drawn, `Read`, and redrawn twice — the first version buried
   the buds in texture and the second aimed the zoom by hand; the version on disk aims it
   at `argmax` of the wall count.
+
+---
+
+## P23, registered and killed in the same fire — and the reason is the interesting part
+
+`budgap.py`. Section 6 above proposed that section 4b's restoring force *is* the bud
+cloud seen at the level of gaps, and called it "a prediction as much as an explanation".
+So it was registered with its sign fixed — **ρ > 0 between a ring's own bud rate and its
+own gap drift, *within* the (1,1,1) chirality**, with the across-chirality number
+declared in advance to be the one that could be two group means in disguise.
+
+Section 4b's construction, gaps built at (60, 90, 150), N = 300, 14 seeds per chirality,
+t to 40,000:
+
+| | bud rate | spread, t < 4,000 | spread, late | drift | Spearman ρ |
+|---|---|---|---|---|---|
+| **(1,1,1)**, 7 rings | 0.647 – 0.682 | 35 – 46 | 66 – 130 | **+30 to +87** | **−0.036** |
+| **(2,2,2)**, 8 rings | 0.190 – 0.223 | 28 – 38 | 9 – 28 | **−2 to −21** | **+0.238** |
+| across both, 15 rings | | | | | **+0.782** |
+
+**P23 is dead**, and the registration says what to do about it: *"if the across-group
+correlation is strong and the within-group one is absent, the honest reading is that
+chirality sets both and budding does not drive drift — and I will say exactly that."*
+Saying it: **chirality sets both. Budding does not drive drift ring-to-ring.** The
++0.782 is Simpson's shape, and I would have reported it as confirmation if I had not
+written the within-group clause down first.
+
+**But the null has a cause, and it is a result in itself: the bud rate barely varies
+between rings.** 0.647–0.682 across seven (1,1,1) rings; 0.190–0.223 across eight
+(2,2,2) rings. Those spreads are ~5% of the gap between the chiralities. **The bud rate
+is a constant of the implementation's chirality, not a property of an individual ring** —
+so there is almost no ring-to-ring variance for the drift to correlate *with*, and the
+test was underpowered by construction. I could not have known that before measuring the
+variance, and the right design follows directly from it: **vary the bud rate at fixed
+chirality**, by running the same experiment on other triples from the 42 whose clouds
+are thicker or thinner, and correlate across *implementations* instead of across seeds.
+
+**And the run reproduces section 4b's signs with an instrument that shares nothing with
+it.** (1,1,1) spread grows, (2,2,2) spread shrinks, every ring, no exceptions — against
+4b's 91 → 240 and 90 → 46. The absolute numbers are not comparable (4b's "spread" is a
+range, mine is a standard deviation) and neither are the survival counts (my ring stays
+"alive" until it *locks*, so a four-wall ring counts; 4b required exactly three walls at
+t = 40,000). The **signs** are the comparison, and they hold.
+
+That is five registered predictions killed in two fires — P16, P17 reshaped, P18 landed,
+P19, P20, P21, P22 superseded, P23 — and every one of them left behind something I did
+not have before. P23's leftover is the best of tonight's: *the thing I assumed varied
+between rings is a constant of the implementation.*
