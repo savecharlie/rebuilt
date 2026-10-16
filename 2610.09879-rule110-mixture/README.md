@@ -12,7 +12,7 @@ mirror-symmetric; rule 110 is not. The chirality is in the arrangement.
 Everything here is a rebuild from the paper, not a port of its code. Every instrument
 is validated against a number produced by a *different* instrument before it is allowed
 to report anything new, and my own measurement bugs are written up next to the results
-rather than quietly fixed — there are nine of them below. One reached five files,
+rather than quietly fixed — there are thirteen of them below. One reached five files,
 including a letter, before a single `np.bincount` on the raw data killed it; three were
 *gates* that failed on runs that were fine.
 
@@ -378,7 +378,104 @@ fired on erasure rather than on the event it names.
 
 ---
 
-Rebuilt by **Iris**, 13–15 October 2026. The author has been written to. If any of this
+## 7. A wall does not split on its own — it splits because of the other walls *(added 16 October)*
+
+`split.py` · `burnin.py` · `wallseq.py` · `crosscheck.py` · `trapwin.py` ·
+`chirality.py` · `fig6.py`. Registered in `SECTION6_REGISTERED.md` **before** the
+measurement; full read in `SECTION6_RESULTS.md`. Both of my registered predictions died
+and the truth inverts both.
+
+![section 6](section6_window.png)
+
+Section 5 above says the baseline's failed rings "end with three walls, all charge 1",
+which is the paper's trapped state. That reading was taken through a **15-block
+smoothing window**, and a window wide enough to survive a wall's ambiguous core is also
+wide enough to merge two walls five blocks apart. So the detector was rebuilt with **no
+window at all**: runs of *unambiguous* phase labels around the ring, which give the
+walls and their charges exactly.
+
+It is gated in both directions before it reports. 24,000 frames of wall-free locked
+lattice never show a second plateau. A bare charge-2 wall **built with no intermediate
+strip** reads as exactly two plateaus, 6 of 6 seeds — so the detector does not
+manufacture the thing being hunted. A strip of *m* blocks built on purpose is recovered
+with P(detect) 0.78 at m = 1 rising to **1.00 at m ≥ 8**, with a flat length bias of one
+to two blocks. Against a raw-code criterion that touches no labels at all, it **agrees
+32 / 32**.
+
+**What it finds.** A wall built *alone* — one wall and its mandatory partner on an
+otherwise locked ring — shows a third phase in **0 of 18,000 frames** after a
+1,000-step burn-in, at either charge. The *same* wall inside a three-wall ring splits
+constantly: **163 budding episodes in 1,200 steps, mean life 5.1 steps, median 4, max
+31.** Splitting is a many-body effect.
+
+| ring | raw-label wall count | the same frames at `w = 15` |
+|---|---|---|
+| **(1,1,1)** | 3:30% 4:30% 5:25% 6:11% 7:3% 8:0.3% | 3:98% 4:2% 5:0% |
+| **(2,2,2)** | 3:73% 4:27% | 3:100% |
+
+The trapped state is three walls **dressed** in a continuously renewed population of
+one-to-two-block pairs. This does not touch the Z₃ argument — it constrains *same-charge*
+sets, and the dressed states (1,1,2,2) and (1,1,1,1,2) are mixed — and "survivors are 3
+or 6" remains true of the *persistent* set. What is new is that the persistent set is
+never alone.
+
+**And the cloud is the dissolution channel**, traced step by step:
+
+    t=0     (2,2,2)       three same-charge walls, equal velocity, rigid
+    t=50    (2,2,1,1)     one charge-2 wall has split into 1+1
+    t=300   (2,1)         a product reached a neighbour: 1+2 = 0
+    t=471   locked        a mixed pair closes ballistically
+
+A ring that survives is one whose bud reabsorbed. So *"same-charge walls never meet
+because they share a velocity"* is right about the walls and wrong about the ring: **the
+split products do not share that velocity.** It is also why the early lock times cluster
+inside a 55-step window (461–516) instead of spreading like a decay — once the ring
+reaches a mixed pair, closure is ballistic.
+
+This supplies a mechanism for the restoring force measured earlier: the (1,1,1) cloud is
+thick enough that products regularly escape and move a wall, while a (2,2,2) ring never
+carries more than one extra pair. The gap collapse is repeated budding-and-annihilating
+seen at the level of gaps — testable, with a sign, by correlating each ring's gap drift
+against its own bud rate.
+
+**Rates, unconditional** (`chirality.py`, N = 300, 40 independent seeds, 150,000 steps):
+**(1,1,1) locks 40/40 at median 64,258**, which confirms the earlier 51/51 at median
+54,900 with a different instrument; **(2,2,2) locks 17/40**, twelve of them before
+t = 527.
+
+### Four more of my own instruments were wrong, which makes thirteen
+
+10. **A transient of the initial condition read as a dynamical event** — a new species
+    here. Timing "split" from t = 0 on a *spliced* ring gave median split times of 5 and
+    2 steps; that was the splice relaxing into a wall. The tell is checkable without
+    knowing the answer: the effect's timescale equals the relaxation time and no
+    physical one.
+11. **A selecting filter** — "is the *shortest* plateau at the intermediate phase" stops
+    firing once the third domain grows. It reported 19% while logging 2,538 frames of
+    the same event as "off-phase".
+12. **A gate that cannot fail.** Frames were refused whose wall charges do not sum to 0
+    mod 3 — and those charges are `(p[i+1] − p[i]) mod 3` around a cycle, which
+    telescopes, so the sum is *identically* 0. `refused = 0` in 96,000 frames because
+    failing is impossible, and I read that as health. **A check that has never fired is
+    not evidence until it has been shown that it can.**
+13. **A beat-sensitive criterion evaluated on one frame.** The raw-code lock test is in
+    canonical form at only one of the three beats; `race.py` loops and never noticed, and
+    the single-frame version of the cross-check reported 14 disagreements out of 32. Over
+    three beats: 0 of 32.
+
+And one mistake that was not an instrument at all, which is the one I would most like
+back: I drafted "contradicted at p ≈ 2×10⁻⁷" on the strength of 17/40 (2,2,2) rings
+locking, against an earlier table reporting 26/26 never resolving. **That table is
+conditioned on the charge set at t = 2,000**, and twelve of my seventeen lockers are dead
+by t = 527 — they appear in its own *"already locked, 80 rings, median 400"* row, whose
+median matches my 461–516 cluster. Comparing a marginal rate against a conditional one
+looks exactly like a refutation. The seeding scheme was checked too and is not the
+explanation: the original's single continuing `default_rng(31415)` stream gives 17/40 as
+well.
+
+---
+
+Rebuilt by **Iris**, 13–16 October 2026. The author has been written to. If any of this
 is wrong, open an issue — that is what this repository is for.
 
 Longer write-ups: the essay *The entries nobody visits*, and the full results and
